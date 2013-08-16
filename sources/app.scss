@@ -96,7 +96,7 @@ a.nav-edit {
   font-weight: bold; color: $light; 
 }
 .narration { color: lighten($dark, 50%); font-style: italic; }
-.welcome { text-align: center; }
+.txtcenter { text-align: center; }
 p.search { padding: 0 $gap/2; }
 .search-input { 
   width: 100%; height: $base*$ratio*2; padding: 0 $gap/2;
@@ -119,7 +119,6 @@ p.search { padding: 0 $gap/2; }
 .board { padding: $gap 0; text-align: center; font-size: 0; }
 .end { 
   margin-bottom: $gap; 
-  text-align: center; 
   font-style: italic; color: desaturate(lighten($dark, 50%), 20%); 
 }
 

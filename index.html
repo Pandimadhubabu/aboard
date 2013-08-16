@@ -2,11 +2,17 @@
 <html ng-app="aboard">
 <head lang="en">
   <meta charset="utf-8">
-  <title>Aboard — RSS inspiration board</title>
-  <meta name="robots" content="index, follow">
+  <title>Aboard — Inspiration board</title>
   <meta name="description" content="Aboard is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.">
   <meta name="author" content="Nicolas Torres">
+    
+  <meta name="robots" content="index, follow">
   <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  
+  <meta name="og:title" content="Aboard — Inspiration board">
+  <meta name="og:description" content="Aboard is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.">
+  <meta name="og:image" content="facebook.jpg">
+  
   <link rel="stylesheet" href="app.css">
 </head>
 <body ng-controller="main" ng-cloak>
@@ -18,7 +24,11 @@
     <div class="nav-wrapper">
       <!-- welcome -->
       <label for="nav-token"><svg class="logo" width="94px" height="60px" viewBox="0 0 315 280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="logo" fill="#F1F0EC"><path d="M157.516234,278.985507 C110.041815,278.985507 81.421678,238.545832 47.9962913,238.545832 C22.4345325,238.545833 12.9221895,250.599771 12.9221895,250.599771 C12.2324486,251.328141 11.1075515,251.329817 10.4144665,250.608515 L0.516170085,240.307239 C-0.179066122,239.583698 -0.174563705,238.419371 0.545319613,237.71631 C0.545319613,237.71631 20.8863751,216.086957 47.5121534,216.086957 C86.5972567,216.086957 110.554857,255.007588 157.516234,255.007597 L157.516234,278.985507 Z M157.516234,278.985507 C204.990652,278.985507 233.61079,238.545832 267.036176,238.545832 C292.597935,238.545833 302.110278,250.599771 302.110278,250.599771 C302.800019,251.328141 303.924916,251.329817 304.618001,250.608515 L314.516297,240.307239 C315.211534,239.583698 315.207031,238.419371 314.487148,237.71631 C314.487148,237.71631 294.146092,216.086957 267.520314,216.086957 C228.435211,216.086957 204.47761,255.007588 157.516234,255.007597 L157.516234,278.985507 Z M157.516234,278.985507" id="wave"></path><path d="M105.977217,253.344373 C86.7224171,208.017525 43.4078337,185.413823 43.4078337,185.413823 C42.445616,184.879096 41.6655844,183.558128 41.6655844,182.438609 L41.6655844,176.043382 C41.6655844,174.934944 42.5624568,174.036376 43.66403,174.036376 L66.8653329,174.036369 C66.8653329,174.036369 53.3795427,108.779986 77.6129801,65.5001676 L142.872781,54.3183471 L143.549359,1.02911737 C143.563386,-0.0757022894 144.281753,-0.407120991 145.137456,0.275768429 L167.453243,18.0847698 C168.316298,18.7735264 169.015942,20.2348329 169.015942,21.3261316 L169.015942,29.0936905 C169.015942,30.1950887 168.12906,31.0879483 167.006316,31.0879483 L149.552455,31.0879483 L149.552455,52.8837877 L271.334416,33.002128 C271.334416,33.002128 226.525665,99.8156026 240.624049,207.115053 L183.027125,203.377026 L231.363356,216.16411 C232.434835,216.447564 233.303441,217.57338 233.303441,218.685629 L233.303441,225.618422 C233.303441,226.727565 232.61523,228.206854 231.777499,228.911744 C231.777499,228.911744 215.763752,242.439809 202.060987,253.344373 C175.646362,274.515185 105.977217,253.344373 105.977217,253.344373 Z M105.977217,253.344373" id="boat"></path></g></svg></label>
-      <p class="narration welcome">Welcome aboard!<br>Combine some RSS feeds and sail the seas of inspiration!</p>
+      <p class="narration txtcenter">Welcome aboard!<br>Combine some RSS feeds and sail the seas of inspiration!</p>
+      <p class="txtcenter">
+        <a href="http://twitter.com/share?text=Aboard, inspiration board for artists and designers&url=http%3A%2F%2Faboard.io" target="_blank">Tweet</a> — 
+        <a href="http://facebook.com/sharer.php?u=http%3A%2F%2Faboard.io" target="_blank">Facebook</a>
+      </p>
       <hr>
   
       <!-- selected feeds -->
@@ -62,7 +72,7 @@
       </a>
     </article>
   </section>
-  <p class="end" ng-bind="items.length?'You have reached the horizon.':'Raise the mainsail!'"></p>
+  <p class="end txtcenter" ng-bind="items.length?'You have reached the horizon.':'Raise the mainsail!'"></p>
   
   
 
