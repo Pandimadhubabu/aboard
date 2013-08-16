@@ -35,7 +35,7 @@
       <!-- selected feeds -->
       <ul class="nav-feeds">
         <li ng-hide="edit"><a href="" ng-click="showItems()">All</a></li>
-        <li ng-class="{'nav-current':feed.current,'nav-selected':feed.status && edit}" ng-repeat="feed in feeds | filter: { status:true } | orderBy: 'name'" ng-controller="feed">
+        <li ng-class="{'nav-current':feed.current,'nav-selected':feed.status && edit}" ng-repeat="feed in feeds | filter:{ status:true } | orderBy:'name'" ng-controller="feed">
           <a href="" ng-click="edit?toggleFeed():toggleItems()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</a>
         </li>
       </ul>
@@ -46,7 +46,7 @@
         <p class="search"><input type="text" class="search-input" ng-model="search" placeholder="Filter"></p>
         <p class="narration">* mature content</p>
         <ul class="nav-feeds">
-          <li ng-class="{'nav-selected':feed.status}" ng-repeat="feed in feeds | filter: search | orderBy: 'name'" ng-controller="feed">
+          <li ng-class="{'nav-selected':feed.status}" ng-repeat="feed in feeds | filter:search | orderBy:'name'" ng-controller="feed">
             <a href="" ng-click="toggleFeed()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</a>
           </li>
         </ul>
@@ -66,7 +66,7 @@
   
   <!-- Board -->
   <section class="board">
-    <article class="item" ng-repeat="item in items | filter: { feed:current } | orderBy:'date':true" ng-animate="{ enter: 'fade-in' }">
+    <article class="item" ng-repeat="item in items | filter:{ feed:current }:true | orderBy:'date':true" ng-animate="{ enter: 'fade-in' }">
       <a href="{{ item.url }}" target="_blank">
         <figure class="item-img js-img" data-src="{{ item.image }}"></figure>
         <h1 class="item-title">{{ item.title }}<br><span class="item-info">{{ item.date | date:'MMM d' }} — {{ item.source }}</span></h1>

@@ -2,7 +2,7 @@
 updateImages = ->
   setTimeout ( ->
     for image in document.querySelectorAll '.js-img'
-      if image.getBoundingClientRect().top < window.innerHeight
+      if image.getBoundingClientRect().top < window.innerHeight*2
         image.style.backgroundImage = 'url('+image.dataset.src+')' if image.style.backgroundImage == ''
   ), 1
 window.addEventListener 'scroll', updateImages
