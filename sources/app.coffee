@@ -15,7 +15,7 @@ window.addEventListener 'resize', updateImages
 hashList = -> id for id in window.location.hash.substring( 1 ).split '-' when id
 hashToggle = ( id ) -> if id in hashList() then hashRemove id else hashAppend id
 hashRemove = ( id ) -> window.location.hash = hashList().filter( ( a ) -> a isnt id ).join '-'
-hashAppend = ( id ) -> window.location.hash = hashList().concat( id ).join '-' if id not in hashList()
+hashAppend = ( id ) -> window.location.hash = hashList().concat( id ).sort( ( a, b ) -> parseInt( a, 16 ) - parseInt( b, 16 ) ).join '-' if id not in hashList()
 window.addEventListener 'hashchange', -> localStorage['hash'] = window.location.hash.substring 1
 window.location.hash = localStorage['hash'] if localStorage['hash']
 

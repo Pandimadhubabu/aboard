@@ -18,7 +18,7 @@ body {
   color: $dark; 
 }
 a { text-decoration: none; color: $dark; }
-label { cursor: pointer; }
+label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: -moz-none; -ms-user-select: none; user-select: none; }
 .ellipsis { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 
@@ -62,7 +62,7 @@ label { cursor: pointer; }
   
   #nav-token:checked ~ & { display: block; top: 0; bottom: 0; }
 }
-.nav-btn { 
+.nav-btn {
   z-index: 100; position: fixed; top: 0; left: 50%; 
   width: $gap*4; height: $gap*2; margin-left: -$gap*2;
   background: $dark;
@@ -163,6 +163,7 @@ p.search { padding: 0 $gap/2; }
   
   // Board
   .board { margin-left: $gap*7; padding: $gap; }
+  .end { margin-left: $gap*8; }
   .item { 
     margin: $gap/2; 
     &:hover, &:focus {
