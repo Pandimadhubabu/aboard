@@ -20,6 +20,7 @@ body {
 a { text-decoration: none; color: $dark; }
 label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: -moz-none; -ms-user-select: none; user-select: none; }
 .ellipsis { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.bold { font-weight: bold; }
 
 
 
@@ -35,10 +36,10 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
 // ------------------------------
 .logo { display: block; margin: $base*$ratio auto; }
 .nav {
-  display: none;
+  display: none; overflow: auto;
   z-index: 50; position: fixed; top: -100%; right: 0; bottom: 100%; left: 0;
   padding-bottom: $gap+$base*$ratio*2;
-  background: $light;
+  background: $dark; 
   color: $light; 
   
   &:before {
@@ -71,11 +72,6 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
   
   #nav-token:checked ~ & { display: none; }
 }
-.nav-wrapper { 
-  position: relative; overflow: auto;
-  max-height: 100%; padding: $gap*1-$base*$ratio 0;
-  border-radius: 0 0 2px 2px; background: $dark; 
-}
 .nav-feeds { 
   margin: $base*$ratio 0; padding: 0 $gap*4/5;
   line-height: $base*$ratio*3/2; list-style: none; 
@@ -93,11 +89,6 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
 }
 .nav-current, .nav-selected { @extend .nav-hover; }
 .nav-selected a { opacity: .7; }
-a.nav-edit { 
-  display: block;
-  line-height: $gap*2; text-align: center; 
-  font-weight: bold; color: $dark; 
-}
 .narration { color: lighten($dark, 50%); font-style: italic; }
 .txtcenter { text-align: center; }
 p.search { padding: 0 $gap/2; }
@@ -154,16 +145,13 @@ p.search { padding: 0 $gap/2; }
   label.no-cursor { cursor: default; }
   
   // Sidebar
-  #nav-token:checked ~ .nav, .nav { display: block; top: 0; right: auto; bottom: 0; left: $gap; width: $gap*6; }
+  #nav-token:checked ~ .nav, .nav { display: block; top: 0; right: auto; bottom: 0; left: 0; width: $gap*7; }
   .nav-btn { display: none; }
-  .nav-wrapper { height: auto; }
   .nav-item { @include transition( all .3s ); &:hover, &:focus { @extend .nav-hover; } }
   .nav-selected { &:hover, &:focus { left: $base/4; opacity: .2; } }
-  a.nav-edit { line-height: $base*$ratio*2; &:hover, &:focus { text-decoration: underline; } }
   
   // Board
-  .board { margin-left: $gap*7; padding: $gap; }
-  .end { margin-left: $gap*8; }
+  .board, .end { margin-left: $gap*7; padding: $gap/2; }
   .item { 
     margin: $gap/2; 
     &:hover, &:focus {
