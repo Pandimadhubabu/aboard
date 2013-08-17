@@ -38,7 +38,7 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
 .nav {
   display: none; overflow: auto;
   z-index: 50; position: fixed; top: -100%; right: 0; bottom: 100%; left: 0;
-  padding-bottom: $gap+$base*$ratio*2;
+  padding: ($gap - $base*$ratio) 0;
   background: $dark; 
   color: $light; 
   
@@ -53,7 +53,10 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
   
   p { 
     margin: $base*$ratio 0; padding: 0 $gap; 
-    a { color: $light; }
+    a {  
+      color: $light; 
+      &:hover, &:focus { text-decoration: underline; } 
+    }
   }
   hr {
     display: block; 
@@ -111,10 +114,7 @@ p.search { padding: 0 $gap/2; }
 // Board
 // ------------------------------
 .board { padding: $gap 0; text-align: center; font-size: 0; }
-.end { 
-  margin-bottom: $gap; 
-  font-style: italic; color: desaturate(lighten($dark, 50%), 20%); 
-}
+.end { margin-top: $gap; font-style: italic; color: desaturate(lighten($dark, 50%), 20%); }
 
 .item { 
   position: relative; display: inline-block; overflow: hidden; 

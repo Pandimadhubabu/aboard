@@ -90,8 +90,10 @@ do ->
   logo.addEventListener 'mouseout', -> clearInterval token
   logo.addEventListener 'mouseover', ->
     speed = 1000/24
-    token = setInterval ( -> 
-      wave.setAttribute 'transform', 'translate('+Math.sin(t*Math.PI*speed/1000/2)*-4+')' 
-      boat.setAttribute 'transform', 'translate('+Math.sin(t*Math.PI*speed/1000/2)*4+')' 
+    shift = 4
+    token = setInterval ( ->
+      x = shift*Math.sin t*Math.PI*speed/1000/2
+      wave.setAttribute 'transform', 'translate(-'+x+')' 
+      boat.setAttribute 'transform', 'translate('+x+')' 
       t++
     ), speed
