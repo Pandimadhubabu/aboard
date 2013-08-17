@@ -37,6 +37,8 @@ label { cursor: pointer; }
 .nav {
   display: none;
   z-index: 50; position: fixed; top: -100%; right: 0; bottom: 100%; left: 0;
+  padding-bottom: $gap+$base*$ratio*2;
+  background: $light;
   color: $light; 
   
   &:before {
@@ -48,22 +50,24 @@ label { cursor: pointer; }
     background-image: linear-gradient(to top, rgba($dark,0) 0%, rgba($dark,.65) 100%);
   }
   
-  a { color: $light; }
-  p { margin: $base*$ratio 0; padding: 0 $gap; }
+  p { 
+    margin: $base*$ratio 0; padding: 0 $gap; 
+    a { color: $light; }
+  }
   hr {
     display: block; 
     margin: -1px $gap 0; 
     border: 0 solid lighten($dark, 10%); border-bottom-width: 1px; 
   }
   
-  #nav-token:checked ~ & { display: block; top: 0; bottom: $gap*2; }
+  #nav-token:checked ~ & { display: block; top: 0; bottom: 0; }
 }
 .nav-btn { 
   z-index: 100; position: fixed; top: 0; left: 50%; 
   width: $gap*4; height: $gap*2; margin-left: -$gap*2;
-  background: $light;
+  background: $dark;
   line-height: $gap*2; text-align: center; 
-  font-size: $base*2;
+  font-size: $base*2; color: $light;
   
   #nav-token:checked ~ & { display: none; }
 }
@@ -76,24 +80,23 @@ label { cursor: pointer; }
   margin: $base*$ratio 0; padding: 0 $gap*4/5;
   line-height: $base*$ratio*3/2; list-style: none; 
 }
-.nav-feeds a { 
+.nav-item { 
   @extend .ellipsis;
   position: relative; left: 0; display: inline-block;
   width: 100%; padding: 2px $gap/5; 
   border-radius: 2px; 
-  line-height: 1;
+  line-height: 1; color: $light;
 }
 .nav-hover {
   background: $light;
   font-weight: bold; color: $dark;
 }
-.nav-current a, .nav-selected a { @extend .nav-hover; }
+.nav-current, .nav-selected { @extend .nav-hover; }
 .nav-selected a { opacity: .7; }
 a.nav-edit { 
   display: block;
-  background: $dark; 
   line-height: $gap*2; text-align: center; 
-  font-weight: bold; color: $light; 
+  font-weight: bold; color: $dark; 
 }
 .narration { color: lighten($dark, 50%); font-style: italic; }
 .txtcenter { text-align: center; }
@@ -148,19 +151,15 @@ p.search { padding: 0 $gap/2; }
 // Responsive
 // ------------------------------
 @media screen and (min-width: $breakpoint) {
-  label { cursor: default; }
+  label.no-cursor { cursor: default; }
   
   // Sidebar
-  #nav-token:checked ~ .nav, .nav { display: block; top: 0; right: auto; bottom: $gap+$base*$ratio*2; left: $gap; width: $gap*6; }
+  #nav-token:checked ~ .nav, .nav { display: block; top: 0; right: auto; bottom: 0; left: $gap; width: $gap*6; }
   .nav-btn { display: none; }
   .nav-wrapper { height: auto; }
-  .nav-feeds a { @include transition( all .3s ); &:hover, &:focus { @extend .nav-hover; } }
-  .nav-selected a { &:hover, &:focus { left: $base/4; opacity: .2; } }
-  a.nav-edit { 
-    background: $light; 
-    line-height: $base*$ratio*2; color: $dark;
-    &:hover, &:focus { text-decoration: underline; } 
-  }
+  .nav-item { @include transition( all .3s ); &:hover, &:focus { @extend .nav-hover; } }
+  .nav-selected { &:hover, &:focus { left: $base/4; opacity: .2; } }
+  a.nav-edit { line-height: $base*$ratio*2; &:hover, &:focus { text-decoration: underline; } }
   
   // Board
   .board { margin-left: $gap*7; padding: $gap; }
