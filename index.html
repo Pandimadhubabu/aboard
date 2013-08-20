@@ -8,18 +8,18 @@ Project under CC BY-SA license: creativecommons.org/licenses/by-sa/3.0
 <head lang="en">
   <meta charset="utf-8">
   <title>Aboard — Inspiration board</title>
-  <meta name="description" content="Aboard is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.">
+  <meta name="description" content="Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.">
   <meta name="author" content="Nicolas Torres">
     
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
   
   <meta name="og:title" content="Aboard — Inspiration board">
-  <meta name="og:description" content="Aboard is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.">
+  <meta name="og:description" content="Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.">
   <meta name="og:image" content="http://aboard.io/facebook.jpg">
   
   <link rel="stylesheet" href="app.css">
-  <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACfElEQVRYCe1XMYsTQRR+b9dwURN3V4WzOfSqxBQKh6Cl2HiVWFkK/gER7k9Y+QMEQRQsxEKwukKQ09biOM5CEa4TC3d211OUS+b5DZqTS3b2bZIiCA6E2Xnvfe9979vZGcIiQvMcwTyLu9r/LgFmPpIkh0/PquDUCiRxfJe5uRnH8fIsJKYmwCynSOh1SHRhFgKHpgYL7abG3BjFu1cDVTpsbYeDoCssXRLuWpG1LMtejsZPTUCYmih0JQiowyhAKCTE3SSOlpiJKfwtrntE7JvMjBd3ZFg7B1qt1mKj0egx2x5Z7iHfWSbCzIuj3fjWQoNraVq8KPNXEkCHK2HAb8uAE9g+pSZbQqODMkzlJgyY75SBJrIJPfUVd3m8BLCZoLSsTlSsJFisXS8x75u8r8AdMgE3d/Yjp3hA532T5RHm7z64VwGRhZM+UF07NPxQVdzl8RIIRWYmgIPqnUbWSwCf2TENrPnx/X/UYrwEIN03DVzDX2gxXgKW+bMG1vxoYleL8RIA0GhgzY8j+qcWM3YXJElyBgfAc5yA5zWw6g8o1mLGFDDG7Aj1b0O+mRVA8RMagTEFHMCYrxvtdrvbaISPcJtd1ZI4PwinmDbx7e9hjvCLYRtrEPYDw3sSuiicxiGu12eYrx9AeRYoiBuZt0HniTH5PSzVPVBJ4A+J5vEkegU6Fz11y81iH34x+a1y51+rKhG6+LHXtzfrdDNMi38aW31La8N11awScOCiKN5DgftViYY+IVkfDOzlPM/dnlCH+gqGGbAPWlEUrWKTXQLrc+hyGbajUGYBMVjytpB9kGXFY9iwrjdqE6iXbvKoWq9g8rT1Ef8JzF2BX/JY21eXQlfwAAAAAElFTkSuQmCC">
+  <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAt9JREFUeNrUVs1P02AYp11hc2vXdpjwEXWfQAeRuL9gcJGEP2EM9IY39bY/whn1gEdhHJgXPKAk4AEjGPXAiYgI6kgcYcJgH+264tbOB5oAjnV9m4AJb5P16fq+z+95fs9XsWaWbbjIhTdc8CLUWwWu814YXP/BA1QAk8kkSdJ+JlupVDAMO3+AQkF0uVx9fcFMNlcqlXAcP2cAsVjEcdPCwrvnY2PSweE6/VZRFPAPfs86h6lpqhtkIMfjdv34mQD5xvVrv5JbBI6VlZNTLEPbbFZBKBw7pwaZ0LUdSAdOQHA6nQ8f3H/y9Jn6P82wbrfL4/VyXVx3T4/DwYZCIUk6sFqv1EjTmlHNZDJlWVEfLRaLr6PjZm9vOBwOBoN+v9/t9rS3tx3vj0YfpdN7DpZGogioBFvsdmpoKNzFcd1+f0dnp8PhANSa1vA839baUpQklmHAY32KIFwFUYw+jo6O3kNJgfm5uYJYZGjqWLtOFuV5nqHtodAQYo7NvJ45YpVATVNZVgKBAEVRKNrB6s+fPqqCgTpwezyI5q+vr29sfDc3NRorNNpOIwN8k5UKpJkxAPSGk0xuHSrSaB6aADyfRwTIZjN1DMLP1BdeLpdBWFr6gAhQ1ZdqD5wTc3J5l9M5FX9Z/9g/NuEmAwBQq3t7+zardXBwEBGg7ahhaM2JagCKJHlB6OvvHxkenojFtJTm8/nNzcT2dspiMUOXIQgCFUCWZdJma2psjE1OJhKJ94uLtR0nCKjbVCq1uvrl1fQ07NfKIs1mB0gQj7t3Rl6MT+hQ1Nrye2cX5oGBoQ/+QjAo0jY+EYvHp7RUC4IwMHB7ZzcNjcvwyAQMs9kMQiQSWVv7Cv21asPy8nIgcGt+/i1jp+qMaJ2RCVzlcjlg3OvzcRwHc59lWakorayszM6+KZXlq80stLiabU6lSB8ADouiKB38qXplMTeRJHnWM2MAl+DLjjiNdim/rv8KMAC56y+yeBJXmQAAAABJRU5ErkJggg==">
 </head>
 <body ng-controller="main" ng-cloak>
   

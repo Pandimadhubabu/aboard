@@ -86,11 +86,7 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
   border-radius: 2px; 
   line-height: 1; color: $light;
 }
-.nav-hover {
-  background: $light;
-  font-weight: bold; color: $dark;
-}
-.nav-current, .nav-selected { @extend .nav-hover; }
+.nav-item:hover, .nav-current, .nav-selected { background: $light; font-weight: bold; color: $dark; }
 .nav-selected a { opacity: .7; }
 .narration { color: lighten($dark, 50%); font-style: italic; }
 .txtcenter { text-align: center; }
@@ -114,7 +110,7 @@ p.search { padding: 0 $gap/2; }
 // Board
 // ------------------------------
 .board { padding: $gap 0; text-align: center; font-size: 0; }
-.end { margin-top: $gap; font-style: italic; color: desaturate(lighten($dark, 50%), 20%); }
+.end { margin: $gap 0; font-style: italic; color: desaturate(lighten($dark, 50%), 20%); }
 
 .item { 
   position: relative; display: inline-block; overflow: hidden; 
@@ -147,11 +143,12 @@ p.search { padding: 0 $gap/2; }
   // Sidebar
   #nav-token:checked ~ .nav, .nav { display: block; top: 0; right: auto; bottom: 0; left: 0; width: $gap*7; }
   .nav-btn { display: none; }
-  .nav-item { @include transition( all .3s ); &:hover, &:focus { @extend .nav-hover; } }
+  .nav-item { @include transition( all .3s ); }
   .nav-selected { &:hover, &:focus { left: $base/4; opacity: .2; } }
   
   // Board
-  .board, .end { margin-left: $gap*7; padding: $gap/2; }
+  .board { margin-left: $gap*7; padding: $gap/2; }
+  .end { margin-left: $gap*7; }
   .item { 
     margin: $gap/2; 
     &:hover, &:focus {
