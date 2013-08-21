@@ -1,10 +1,10 @@
 # Prevent off-screen image to load
 updateImages = ->
   setTimeout ( ->
-    for image in document.querySelectorAll '.js-img'
+    for image in [].slice.call document.getElementsByClassName( 'js-img' ), 0
       if image.getBoundingClientRect().top < window.innerHeight*2
         image.style.backgroundImage = 'url('+image.dataset.src+')' if image.style.backgroundImage == ''
-  ), 1
+  ), 0
 window.addEventListener 'scroll', updateImages
 window.addEventListener 'resize', updateImages
 
