@@ -3,7 +3,7 @@ updateImages = ->
   setTimeout ( ->
     for image in [].slice.call document.getElementsByClassName( 'js-img' ), 0
       if image.getBoundingClientRect().top < window.innerHeight*2
-        image.style.backgroundImage = 'url('+image.dataset.src+')' if image.style.backgroundImage == ''
+        image.style.backgroundImage = 'url('+image.dataset.src+')' if not image.style.backgroundImage
   ), 0
 window.addEventListener 'scroll', updateImages
 window.addEventListener 'resize', updateImages
@@ -43,6 +43,8 @@ app.controller 'main', ( $scope, $http, $compile ) ->
         hashAppend feed.id if feed.status
     $scope.loadItems id for id in hashList()
     $scope.feeds = feeds
+   
+  $scope.$watch 'token', -> window.scrollTo 0 
     
   $scope.showItems = ( id = '' ) -> 
     ( feed.current = feed.id is id ) for feed in $scope.feeds

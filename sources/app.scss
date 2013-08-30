@@ -36,8 +36,7 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
 // ------------------------------
 .logo { display: block; margin: $base*$ratio auto; }
 .nav {
-  display: none; overflow: auto;
-  z-index: 50; position: fixed; top: -100%; right: 0; bottom: 100%; left: 0;
+  display: none;
   padding: ($gap - $base*$ratio) 0;
   background: $dark; 
   color: $light; 
@@ -67,13 +66,12 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
   #nav-token:checked ~ & { display: block; top: 0; bottom: 0; }
 }
 .nav-btn {
-  z-index: 100; position: fixed; top: 0; left: 50%; 
-  width: $gap*4; height: $gap*2; margin-left: -$gap*2;
+  z-index: 100; position: fixed; top: 0; right: 0; 
+  width: $gap*1.5; height: $gap*1.5;
   background: $dark;
-  line-height: $gap*2; text-align: center; 
+  line-height: $gap*1.5; text-align: center; 
   font-size: $base*2; color: $light;
-  
-  #nav-token:checked ~ & { display: none; }
+  #nav-token:checked ~ & { position: absolute; }
 }
 .nav-feeds { 
   margin: $base*$ratio 0; padding: 0 $gap*4/5;
@@ -87,7 +85,7 @@ label { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none;
   line-height: 1; color: $light;
 }
 .nav-item:hover, .nav-current, .nav-selected { background: $light; font-weight: bold; color: $dark; }
-.nav-selected a { opacity: .7; }
+.nav-selected { opacity: .7; }
 .narration { color: lighten($dark, 50%); font-style: italic; }
 .txtcenter { text-align: center; }
 p.search { padding: 0 $gap/2; }
@@ -141,10 +139,14 @@ p.search { padding: 0 $gap/2; }
   label.no-cursor { cursor: default; }
   
   // Sidebar
-  #nav-token:checked ~ .nav, .nav { display: block; top: 0; right: auto; bottom: 0; left: 0; width: $gap*7; }
+  #nav-token:checked ~ .nav, .nav { 
+    display: block; overflow: auto; 
+    z-index: 50; position: fixed; top: 0; right: auto; bottom: 0; left: 0; 
+    width: $gap*7; 
+  }
   .nav-btn { display: none; }
   .nav-item { @include transition( all .3s ); }
-  .nav-selected { &:hover, &:focus { left: $base/4; opacity: .2; } }
+  .nav-selected:hover { left: $base/4; opacity: .2; }
   
   // Board
   .board { margin-left: $gap*7; padding: $gap/2; }
