@@ -1,9 +1,6 @@
 <IfModule mod_rewrite.c>
 # URL-Rewriting
-  RewriteEngine on 
-
-# Deny access to site/
-  RewriteRule ^core/(.*) error [R=301,L]
+  RewriteEngine on
 
 # Rewrite any request to index
   RewriteCond %{REQUEST_FILENAME} !-f
