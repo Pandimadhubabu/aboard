@@ -60,11 +60,22 @@ app.controller 'main', ( $scope, $http, $compile ) ->
     
   $scope.resetCurrent = -> $scope.setCurrent false
   $scope.setCurrent = ( id ) -> 
-    if $scope.current = id
+    console.log id
+    $scope.current = id
+    if id
       [item, list] = [document.querySelector('#feed-'+id), document.querySelector('.nav-feeds')]
       list.scrollLeft = item.offsetLeft - list.offsetLeft - list.offsetWidth/2 + item.offsetWidth/2
     board.scrollTop = 0
     do updateImages
+    do $scope.$apply if not $scope.$$phase
+   
+  # Keyboard navigation
+  window.addEventListener 'keydown', (e) ->
+    switch e.which
+      when 37, 38 then ( target = if $scope.current then document.querySelector('#feed-'+$scope.current).previousSibling else document.querySelector('.nav-feed:last-child') )
+      when 39, 40 then ( target = if $scope.current then document.querySelector('#feed-'+$scope.current).nextSibling else document.querySelector('.nav-feed:first-child') )
+    return if not target
+    if target.getAttribute then $scope.setCurrent target.getAttribute('id').replace('feed-', '') else do $scope.resetCurrent
     
  
 # Feed controller
