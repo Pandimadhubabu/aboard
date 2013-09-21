@@ -60,9 +60,7 @@ app.controller 'main', ( $scope, $http, $compile ) ->
     
   $scope.resetCurrent = -> $scope.setCurrent false
   $scope.setCurrent = ( id ) -> 
-    console.log id
-    $scope.current = id
-    if id
+    if $scope.current = id
       [item, list] = [document.querySelector('#feed-'+id), document.querySelector('.nav-feeds')]
       list.scrollLeft = item.offsetLeft - list.offsetLeft - list.offsetWidth/2 + item.offsetWidth/2
     board.scrollTop = 0
