@@ -70,10 +70,9 @@ app.controller 'main', ( $scope, $http, $compile ) ->
   # Keyboard navigation
   window.addEventListener 'keydown', (e) ->
     switch e.which
-      when 37, 38 then ( target = if $scope.current then document.querySelector('#feed-'+$scope.current).previousSibling else document.querySelector('.nav-feed:last-child') )
-      when 39, 40 then ( target = if $scope.current then document.querySelector('#feed-'+$scope.current).nextSibling else document.querySelector('.nav-feed:first-child') )
-    return if not target
-    if target.getAttribute then $scope.setCurrent target.getAttribute('id').replace('feed-', '') else do $scope.resetCurrent
+      when 37 then ( target = if $scope.current then document.querySelector('#feed-'+$scope.current).previousSibling else document.querySelector('.nav-feed:last-child') )
+      when 39 then ( target = if $scope.current then document.querySelector('#feed-'+$scope.current).nextSibling else document.querySelector('.nav-feed:first-child') )
+    ( if target.getAttribute then $scope.setCurrent target.getAttribute('id').replace('feed-', '') else do $scope.resetCurrent ) if target
     
  
 # Feed controller
