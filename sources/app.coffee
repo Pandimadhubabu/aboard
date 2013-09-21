@@ -1,11 +1,13 @@
 # Prevent off-screen image to load
+board = document.querySelector '.board'
 updateImages = ->
   setTimeout ( ->
     for image in [].slice.call document.getElementsByClassName( 'js-img' ), 0
       if image.getBoundingClientRect().top < window.innerHeight*2
         image.style.backgroundImage = 'url('+image.dataset.src+')' if not image.style.backgroundImage
   ), 0
-window.addEventListener 'scroll', updateImages
+board.addEventListener 'scroll', updateImages
+board.addEventListener 'touchmove', updateImages
 window.addEventListener 'resize', updateImages
 
 
@@ -17,7 +19,7 @@ hashToggle = ( id ) -> if id in hashList() then hashRemove id else hashAppend id
 hashRemove = ( id ) -> window.location.hash = hashList().filter( ( a ) -> a isnt id ).join '-'
 hashAppend = ( id ) -> window.location.hash = hashList().concat( id ).sort( ( a, b ) -> parseInt( a, 16 ) - parseInt( b, 16 ) ).join '-' if id not in hashList()
 window.addEventListener 'hashchange', -> localStorage['hash'] = window.location.hash.substring 1
-window.location.hash = localStorage['hash'] if localStorage['hash']
+window.location.hash = localStorage['hash'] if localStorage['hash'] isnt window.location.hash.substring 1
 
 
 
@@ -31,7 +33,7 @@ app.filter 'mature', -> ( tags ) -> if 'mature' in tags.split ' ' then '*' else 
 app.controller 'main', ( $scope, $http, $compile ) ->
   $scope.feeds = []
   $scope.items = []
-  $scope.current = ''
+  $scope.current = false
   
   http = $http.jsonp 'api/feeds?callback=JSON_CALLBACK'
   http.success ( feeds ) -> 
@@ -43,40 +45,35 @@ app.controller 'main', ( $scope, $http, $compile ) ->
         hashAppend feed.id if feed.status
     $scope.loadItems id for id in hashList()
     $scope.feeds = feeds
-   
-  $scope.$watch 'token', -> window.scrollTo 0 
     
-  $scope.showItems = ( id = '' ) -> 
-    ( feed.current = feed.id is id ) for feed in $scope.feeds
-    $scope.current = id
-    do updateImages
-    window.scrollTo 0
-  
-  $scope.toggleEdit = ->
-    $scope.edit = not $scope.edit
-    do $scope.showItems if not $scope.edit
-    
-  $scope.loadItems = ( id, callback = false ) ->
+  $scope.loadItems = ( id, current = false ) ->
     http = $http.jsonp 'api/feed/'+id+'/?callback=JSON_CALLBACK'
     http.error -> hashRemove id
     http.success ( items ) ->
       ( $scope.items.push item for item in items )
       do updateImages
-      do callback if callback
+      $scope.setCurrent id if current
       
   $scope.removeItems = ( id ) ->
     $scope.items = $scope.items.filter ( item ) -> item.feed isnt id
-    do $scope.showItems
+    do $scope.resetCurrent
+    
+  $scope.resetCurrent = -> $scope.setCurrent false
+  $scope.setCurrent = ( id ) -> 
+    if $scope.current = id
+      [item, list] = [document.querySelector('#feed-'+id), document.querySelector('.nav-feeds')]
+      list.scrollLeft = item.offsetLeft - list.offsetLeft - list.offsetWidth/2 + item.offsetWidth/2
+    board.scrollTop = 0
+    do updateImages
     
  
 # Feed controller
 app.controller 'feed', ( $scope, $http ) ->
+  $scope.showItems = -> $scope.setCurrent $scope.feed.id
   $scope.toggleFeed = ->
     $scope.feed.status = not $scope.feed.status
     hashToggle $scope.feed.id
-    if $scope.feed.status then $scope.loadItems $scope.feed.id, $scope.toggleItems else $scope.removeItems $scope.feed.id
-      
-  $scope.toggleItems = -> $scope.showItems $scope.feed.id
+    if $scope.feed.status then $scope.loadItems $scope.feed.id, true else $scope.removeItems $scope.feed.id
   
 
 

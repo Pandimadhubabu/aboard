@@ -10,88 +10,98 @@ Project under CC BY-SA license: creativecommons.org/licenses/by-sa/3.0
   <title>Aboard — Inspiration board</title>
   <meta name="description" content="Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.">
   <meta name="author" content="Nicolas Torres">
-    
+
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  
+
   <meta name="og:title" content="Aboard — Inspiration board">
   <meta name="og:description" content="Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.">
   <meta name="og:image" content="http://aboard.io/facebook.jpg">
-  
+
   <link rel="stylesheet" href="app.css">
   <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAt9JREFUeNrUVs1P02AYp11hc2vXdpjwEXWfQAeRuL9gcJGEP2EM9IY39bY/whn1gEdhHJgXPKAk4AEjGPXAiYgI6kgcYcJgH+264tbOB5oAjnV9m4AJb5P16fq+z+95fs9XsWaWbbjIhTdc8CLUWwWu814YXP/BA1QAk8kkSdJ+JlupVDAMO3+AQkF0uVx9fcFMNlcqlXAcP2cAsVjEcdPCwrvnY2PSweE6/VZRFPAPfs86h6lpqhtkIMfjdv34mQD5xvVrv5JbBI6VlZNTLEPbbFZBKBw7pwaZ0LUdSAdOQHA6nQ8f3H/y9Jn6P82wbrfL4/VyXVx3T4/DwYZCIUk6sFqv1EjTmlHNZDJlWVEfLRaLr6PjZm9vOBwOBoN+v9/t9rS3tx3vj0YfpdN7DpZGogioBFvsdmpoKNzFcd1+f0dnp8PhANSa1vA839baUpQklmHAY32KIFwFUYw+jo6O3kNJgfm5uYJYZGjqWLtOFuV5nqHtodAQYo7NvJ45YpVATVNZVgKBAEVRKNrB6s+fPqqCgTpwezyI5q+vr29sfDc3NRorNNpOIwN8k5UKpJkxAPSGk0xuHSrSaB6aADyfRwTIZjN1DMLP1BdeLpdBWFr6gAhQ1ZdqD5wTc3J5l9M5FX9Z/9g/NuEmAwBQq3t7+zardXBwEBGg7ahhaM2JagCKJHlB6OvvHxkenojFtJTm8/nNzcT2dspiMUOXIQgCFUCWZdJma2psjE1OJhKJ94uLtR0nCKjbVCq1uvrl1fQ07NfKIs1mB0gQj7t3Rl6MT+hQ1Nrye2cX5oGBoQ/+QjAo0jY+EYvHp7RUC4IwMHB7ZzcNjcvwyAQMs9kMQiQSWVv7Cv21asPy8nIgcGt+/i1jp+qMaJ2RCVzlcjlg3OvzcRwHc59lWakorayszM6+KZXlq80stLiabU6lSB8ADouiKB38qXplMTeRJHnWM2MAl+DLjjiNdim/rv8KMAC56y+yeBJXmQAAAABJRU5ErkJggg==">
 </head>
 <body ng-controller="main" ng-cloak>
+  <input type="checkbox" id="menu-token" ng-model="token" ng-hide="true">
+  <main class="wrapper">
   
-  <!-- Sidebar -->
-  <input type="checkbox" id="nav-token" ng-model="token" ng-hide="true">
-  <label for="nav-token" class="nav-btn">&#9776;</label>
-  <header class="nav">
-    
-    <!-- welcome -->
-    <svg id="logo" class="logo" width="66px" height="60px" viewBox="0 0 310 280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M309.448426,237.498833 C309.448426,237.498833 289.432686,215.719844 263.23332,215.719844 C224.774764,215.719844 201.201665,254.910039 154.992017,254.910039 C108.782369,254.910039 85.2092708,215.719844 46.7507145,215.719844 C20.5513483,215.719844 0.535608875,237.498833 0.535608875,237.498833 C-0.171715068,238.207004 -0.176081266,239.3793 0.508320143,240.108171 L10.247123,250.480156 C10.9293413,251.206848 12.0361723,251.205759 12.7151159,250.47144 C12.7151159,250.47144 22.0751511,238.333385 47.22663,238.333385 C80.1161018,238.333385 108.278074,279.05323 154.992017,279.05323 C201.705961,279.05323 229.867933,238.333385 262.757405,238.333385 C287.909975,238.333385 297.268919,250.47144 297.268919,250.47144 C297.947862,251.205759 299.055785,251.206848 299.738003,250.480156 L309.475715,240.108171 C310.160116,239.3793 310.15575,238.207004 309.448426,237.498833 C309.448426,237.498833 310.15575,238.207004 309.448426,237.498833 L309.448426,237.498833 L309.448426,237.498833 Z M309.448426,237.498833" id="wave" fill="#F1F0EC"></path><path d="M105.266285,253.368005 C86.1684364,208.036929 43.2208763,185.439192 43.2208763,185.439192 C42.2587946,184.899956 41.4788732,183.575251 41.4788732,182.455626 L41.4788732,176.059804 C41.4788732,174.951262 42.368435,174.052611 43.4820144,174.05261 L66.4732123,174.052603 C66.4732123,174.052603 53.0973481,108.790133 77.1332527,65.5062775 L141.861105,54.323414 L142.532168,1.02921337 C142.54608,-0.075709351 143.258592,-0.407158967 144.116804,0.283425512 L166.231722,18.0788254 C167.092979,18.7718609 167.791167,20.2367204 167.791167,21.3281209 L167.791167,29.0964044 C167.791167,30.1979053 166.885947,31.0908482 165.797921,31.0908482 L148.486331,31.0908482 L148.486331,52.8887207 L269.275616,33.0052064 C269.275616,33.0052064 224.832113,99.8249135 238.815578,207.134373 L181.68814,203.395997 L229.630371,216.184274 C230.693116,216.467754 231.554642,217.593676 231.554642,218.706028 L231.554642,225.639468 C231.554642,226.748714 230.872041,228.228142 230.025022,228.94676 C230.025022,228.94676 214.157923,242.462424 200.566853,253.368005 C174.36754,274.540792 105.266285,253.368005 105.266285,253.368005 Z M105.266285,253.368005" id="boat" fill="#F1F0EC"></path></svg>
-    <p class="narration txtcenter">Welcome aboard!<br>Combine some RSS feeds and sail the seas of inspiration!</p>
-    <p class="txtcenter">
-      <a href="http://twitter.com/share?text=Aboard, combine RSS feeds for inspiration&url=http%3A%2F%2Faboard.io" target="_blank">Tweet</a> — 
-      <a href="http://facebook.com/sharer.php?u=http%3A%2F%2Faboard.io" target="_blank">Facebook</a>
-    </p>
-    <hr>
-
-    <!-- selected feeds -->
-    <ul class="nav-feeds">
-      <li ng-hide="edit"><label for="nav-token" class="nav-item bold" ng-click="showItems()">All</a></label>
-      <li ng-repeat="feed in feeds | filter:{ status:true } | orderBy:'name'" ng-controller="feed">
-        <label for="nav-token" class="nav-item" ng-class="{'nav-current':feed.current,'nav-selected':feed.status && edit}" ng-click="edit?toggleFeed():toggleItems()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</label>
-      </li>
-    </ul>
-    <hr>
-
-    <!-- all feeds -->
-    <p class="txtcenter"><a href="" class="bold" ng-click="toggleEdit()">{{ edit?'Done':'Combine feeds' }}</a></p>
-    <div ng-show="edit">
+    <!-- Sidebar -->
+    <header class="menu">
+  
+      <!-- welcome -->
+      <figure><svg id="logo" class="logo" width="66px" height="60px" viewBox="0 0 310 280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M309.448426,237.498833 C309.448426,237.498833 289.432686,215.719844 263.23332,215.719844 C224.774764,215.719844 201.201665,254.910039 154.992017,254.910039 C108.782369,254.910039 85.2092708,215.719844 46.7507145,215.719844 C20.5513483,215.719844 0.535608875,237.498833 0.535608875,237.498833 C-0.171715068,238.207004 -0.176081266,239.3793 0.508320143,240.108171 L10.247123,250.480156 C10.9293413,251.206848 12.0361723,251.205759 12.7151159,250.47144 C12.7151159,250.47144 22.0751511,238.333385 47.22663,238.333385 C80.1161018,238.333385 108.278074,279.05323 154.992017,279.05323 C201.705961,279.05323 229.867933,238.333385 262.757405,238.333385 C287.909975,238.333385 297.268919,250.47144 297.268919,250.47144 C297.947862,251.205759 299.055785,251.206848 299.738003,250.480156 L309.475715,240.108171 C310.160116,239.3793 310.15575,238.207004 309.448426,237.498833 C309.448426,237.498833 310.15575,238.207004 309.448426,237.498833 L309.448426,237.498833 L309.448426,237.498833 Z M309.448426,237.498833" id="wave" fill="#F1F0EC"></path><path d="M105.266285,253.368005 C86.1684364,208.036929 43.2208763,185.439192 43.2208763,185.439192 C42.2587946,184.899956 41.4788732,183.575251 41.4788732,182.455626 L41.4788732,176.059804 C41.4788732,174.951262 42.368435,174.052611 43.4820144,174.05261 L66.4732123,174.052603 C66.4732123,174.052603 53.0973481,108.790133 77.1332527,65.5062775 L141.861105,54.323414 L142.532168,1.02921337 C142.54608,-0.075709351 143.258592,-0.407158967 144.116804,0.283425512 L166.231722,18.0788254 C167.092979,18.7718609 167.791167,20.2367204 167.791167,21.3281209 L167.791167,29.0964044 C167.791167,30.1979053 166.885947,31.0908482 165.797921,31.0908482 L148.486331,31.0908482 L148.486331,52.8887207 L269.275616,33.0052064 C269.275616,33.0052064 224.832113,99.8249135 238.815578,207.134373 L181.68814,203.395997 L229.630371,216.184274 C230.693116,216.467754 231.554642,217.593676 231.554642,218.706028 L231.554642,225.639468 C231.554642,226.748714 230.872041,228.228142 230.025022,228.94676 C230.025022,228.94676 214.157923,242.462424 200.566853,253.368005 C174.36754,274.540792 105.266285,253.368005 105.266285,253.368005 Z M105.266285,253.368005" id="boat" fill="#F1F0EC"></path></svg></figure>
+      <p class="narration txtcenter">Welcome aboard!<br>Combine some RSS feeds and sail the seas of inspiration!</p>
+      <p class="txtcenter">
+        <a href="http://twitter.com/share?text=Aboard, combine RSS feeds for inspiration&url=http%3A%2F%2Faboard.io" target="_blank">Tweet</a> — 
+        <a href="http://facebook.com/sharer.php?u=http%3A%2F%2Faboard.io" target="_blank">Facebook</a>
+      </p>
       <hr>
+  
+      <!-- combine feeds -->
       <p class="search"><input type="text" class="search-input" ng-model="search" placeholder="Filter"></p>
       <p class="narration">* mature content</p>
-      <ul class="nav-feeds">
+      <ul class="menu-feeds">
         <li ng-repeat="feed in feeds | filter:search | orderBy:'name'" ng-controller="feed">
-          <a href="" class="nav-item" ng-class="{'nav-selected':feed.status}" ng-click="toggleFeed()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</a>
+          <a href="" class="menu-feed" ng-class="{'menu-selected':feed.status}" ng-click="toggleFeed()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</a>
         </li>
       </ul>
       <hr>
-
+  
       <!-- contact -->
       <p class="narration">You can't find your favorite RSS feed? Please send it to me and I'll do my best to add it fast:</p>
       <p><a href="mailto:captain@aboard.io">captain@aboard.io</a></p>
-    </div>
-  </header>
+    </header>
+
+  
+  
+    <!-- Nav -->
+    <nav class="nav">
+      <label for="menu-token" class="menu-btn noselect">&#9776;</label>
+      <a href="" class="nav-reset bold" ng-click="resetCurrent()">All</a>
+      <div class="nav-feeds-box">
+        <ul class="nav-feeds">
+          <li id="feed-{{ feed.id }}" class="nav-feed" ng-class="{'nav-current':feed.id==current}" ng-repeat="feed in feeds | filter:{ status:true } | orderBy:'name'" ng-controller="feed">
+            <a href="" ng-click="showItems()">{{ feed.tags | mature }}{{ feed.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   
   
   
-  <!-- Board -->
-  <section class="board">
-    <article class="item" ng-repeat="item in items | filter:{ feed:current }:true | orderBy:'date':true" ng-animate="{ enter: 'fade-in' }">
-      <a href="{{ item.url }}" target="_blank">
-        <figure class="item-img js-img" data-src="{{ item.image }}"></figure>
-        <h1 class="item-title">{{ item.title }}<br><span class="item-info">{{ item.date | date:'MMM d' }} — {{ item.source }}</span></h1>
-      </a>
-    </article>
-  </section>
-  <p class="end txtcenter">{{ items.length?'You have reached the horizon.':'Raise the mainsail!' }}</p>
+    <!-- Board -->
+    <label for="menu-token" class="board-overlay noselect"></label>
+    <section class="board">
+      <!-- yoggrt.com Zone Code -->
+      <div class="item yoggrt"><div id="xxx" class="bsarocks xxx"></div><a href="http://yoggrt.com" id="bsap_aplink">Ads via Yoggrt</a></div>
   
+      <!-- items -->
+      <article class="item" ng-repeat="item in items | filter:{ feed:current }:true | orderBy:'date':true" ng-animate="{ enter: 'fade-in' }">
+        <a href="{{ item.url }}" target="_blank">
+          <figure class="item-img js-img" data-src="{{ item.image }}"></figure>
+          <h1 class="item-title">{{ item.title }}<br><span class="item-info">{{ item.date | date:'MMM d' }} — {{ item.source }}</span></h1>
+        </a>
+      </article>
   
+      <!-- footer -->
+      <footer class="end txtcenter"><p>{{ items.length?'You have reached the horizon.':'Raise the mainsail!' }}</p></footer>
+    </section>
+  </main><!-- end of .wrapper -->
+  
+
+
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'); 
+    ga('create', 'xxx', 'aboard.io'); ga('send', 'pageview');
+  </script>
 
   <!-- Scripts -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
   <script src="app.js"></script>
-  
-  
-  
-  <!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'); 
-    ga('create', 'UA-43254126-1', 'aboard.io');
-    ga('send', 'pageview');
-  </script>
+
+  <!-- Yoggrt.com Ad Code -->
+  <script>(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//s3.buysellads.com/ac/bsa.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
 
 </body>
 </html>

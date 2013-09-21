@@ -39,7 +39,7 @@
         'title'   => (string)utf8_decode($item->title),
         'author'  => (string)utf8_decode($item->author),
         'date'    => (string)(strtotime($item->pubDate)*1000),
-        'url'     => (string)$item->guid,
+        'url'     => (string)($item->guid?$item->guid:$item->link),
         'image'   => (string)$m[1]
       );
     }
