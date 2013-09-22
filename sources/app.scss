@@ -13,7 +13,7 @@ $breakpoint: $gap*19;
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; }
 html, body, .wrapper, .menu, .board { height: 100%; }
 body { background: $light; font: $base $font; line-height: $ratio; color: $dark; }
-.wrapper { background: $dark; }
+.wrapper { overflow: hidden; position: relative; background: $dark; }
 a { text-decoration: none; color: $dark; }
 .noselect { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: -moz-none; -ms-user-select: none; user-select: none; }
 .ellipsis { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -127,7 +127,7 @@ a { text-decoration: none; color: $dark; }
 .board {
   z-index: 100; overflow-y: scroll; -webkit-overflow-scrolling: touch;
   position: absolute; top: 0; left: 0;
-  width: 100%; padding: $gap*2 $gap/2 $gap/2;
+  width: 100%; padding: $gap*(5/4+1/2) $gap/2 $gap/2;
   background: $light;
   font-size: 0; 
   @extend .transition, .txtcenter;

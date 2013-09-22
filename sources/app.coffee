@@ -19,7 +19,7 @@ hashToggle = ( id ) -> if id in hashList() then hashRemove id else hashAppend id
 hashRemove = ( id ) -> window.location.hash = hashList().filter( ( a ) -> a isnt id ).join '-'
 hashAppend = ( id ) -> window.location.hash = hashList().concat( id ).sort( ( a, b ) -> parseInt( a, 16 ) - parseInt( b, 16 ) ).join '-' if id not in hashList()
 window.addEventListener 'hashchange', -> localStorage['hash'] = window.location.hash.substring 1
-window.location.hash = localStorage['hash'] if localStorage['hash'] isnt window.location.hash.substring 1
+window.location.hash = localStorage['hash'] if localStorage['hash']?
 
 
 
@@ -41,6 +41,7 @@ app.controller 'main', ( $scope, $http, $compile ) ->
       feed.status = feed.id in hashList() for feed in feeds
     else
       for feed in feeds
+        continue if not feed?
         feed.status = if feed.status is "1" then true else false
         hashAppend feed.id if feed.status
     $scope.loadItems id for id in hashList()
