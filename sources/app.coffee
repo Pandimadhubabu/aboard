@@ -78,9 +78,7 @@ app.controller 'main', ( $scope, $http, $compile ) ->
  
 # Feed controller
 app.controller 'feed', ( $scope, $http ) ->
-  $scope.showItems = -> 
-    $http.get 'api/nav'
-    $scope.setCurrent $scope.feed.id
+  $scope.showItems = -> $scope.setCurrent $scope.feed.id
   $scope.toggleFeed = ->
     $scope.feed.status = not $scope.feed.status
     hashToggle $scope.feed.id

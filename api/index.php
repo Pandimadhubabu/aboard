@@ -16,10 +16,7 @@
     file_put_contents(db, json_encode(csvToArray(gsheet)), LOCK_EX);
     go(url('../'));
   });
-
-# Count nav clicks
-  get('/nav', function() { file_put_contents('count.txt', file_get_contents('count.txt').date('Y-m-d H:i:s').' — '.$_SERVER['REMOTE_ADDR']."\n", LOCK_EX); });
-
+  
 # Get feeds
   get('/feeds', function() {
     header('Content-Type:application/javascript;Charset:UTF-8');
