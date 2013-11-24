@@ -7,7 +7,7 @@ Feel free to have a look at the source code.
 
 This project is licenced under [Creative Common BY-SA](http://creativecommons.org/licenses/by-sa/3.0).
 
-# Put online instructions
+# Publishing instructions
 
     create folder /api/cache/
     compile /sources/app.coffee -> /app.js (unminified)
