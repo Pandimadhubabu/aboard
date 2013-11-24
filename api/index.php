@@ -11,7 +11,7 @@
 
 # Update feeds
   get('/update', function() {
-    if (sha1(get('pass')) != pass) go(url('../'));
+    if (sha1($_GET['pass']) != pass) return false;
     array_map('unlink', glob(cache.'*'));
     file_put_contents(db, json_encode(csvToArray(gsheet)), LOCK_EX);
     go(url('../'));

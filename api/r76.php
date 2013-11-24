@@ -26,7 +26,7 @@
       elseif ($uri === false) $get = $_GET;
       return $this->root.(($uri !== false AND !is_array($uri))?trim($uri, "/ \t\n\r\0\x0B"):$this->uri()).(count($get)?'/'.strtr(http_build_query($get), '=&', ':/'):'');
     }
-    
+
   # Match route (e.g. GET|POST|PUT|DELETE, /path/with/@var, path/to/file.ext|func()|class->method()). Note: you can use '@var' in callbacks name.
     public function on($verb, $route, $callback) {
       if ($this->callback) return;
