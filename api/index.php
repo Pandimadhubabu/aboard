@@ -13,7 +13,7 @@
   get('/update', function() {
     if (sha1($_GET['pass']) != pass) return false;
     array_map('unlink', glob(cache.'*'));
-    file_put_contents(db, json_encode(csvToArray(gsheet)), LOCK_EX);
+    file_put_contents(db, json_encode(csvToArray(gsheet), JSON_PRETTY_PRINT), LOCK_EX);
     go(url('../'));
   });
   
@@ -22,7 +22,7 @@
     header('Content-Type:application/javascript;Charset:UTF-8');
     cache(function() {
       $feeds = array_values(array_filter(json_decode(file_get_contents(db), true), function($a) { return $a['online']; }));
-      echo $_GET['callback'],'(',json_encode($feeds),');';
+      echo $_GET['callback'],'(',json_encode($feeds, JSON_PRETTY_PRINT),');';
     }, cache, expire);
   });
 
@@ -33,10 +33,10 @@
       $feeds = json_decode(file_get_contents(db), true);
       $feeds = array_combine(array_map('array_shift', $feeds), $feeds);
       if (!($feed = $feeds[(string)uri('id')]) OR !$feed['online']) { header('HTTP/1.0 400 Bad Request', true, 400); exit('Invalid ID'); }
-      else echo $_GET['callback'],'(',json_encode(toBoard($feed)),');';
+      else echo $_GET['callback'],'(',json_encode(toBoard($feed), JSON_PRETTY_PRINT),');';
     }, cache, expire);
   });
 
 # Get feeds if no cache, then run
-  if (!is_file(db)) file_put_contents(db, json_encode(csvToArray(gsheet)), LOCK_EX);
+  if (!is_file(db)) file_put_contents(db, json_encode(csvToArray(gsheet), JSON_PRETTY_PRINT), LOCK_EX);
   run(function() { header('HTTP/1.0 404 Not Found', true, 404); exit('404 Error'); }); 
