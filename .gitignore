@@ -1,5 +1,6 @@
 .DS_Store
 app.css
 app.js
-api/cache
+api/cache/*
+!.gitkeep
 facebook.jpg

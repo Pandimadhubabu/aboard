@@ -12,7 +12,7 @@
 # Update feeds
   get('/update', function() {
     if (sha1($_GET['pass']) != pass) return false;
-    array_map('unlink', glob(cache.'*'));
+    array_map('unlink', array_filter(glob(cache.'*'), function($f) { return !in_array(basename($f), array('.gitkeep')); }));
     file_put_contents(db, json_encode(csvToArray(gsheet), JSON_PRETTY_PRINT), LOCK_EX);
     go(url('../'));
   });
