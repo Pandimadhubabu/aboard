@@ -30,13 +30,14 @@ app.filter 'mature', -> ( tags ) -> if 'mature' in tags.split ' ' then '*' else 
 
 
 # Main controller
-app.controller 'main', ( $scope, $http, $compile ) ->
+app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile ) ->
   $scope.feeds = []
   $scope.items = []
   $scope.current = false
-  
-  http = $http.jsonp 'api/feeds?callback=JSON_CALLBACK'
-  http.success ( feeds ) -> 
+
+  http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/0AnqTdoRZw_IRdHctX2RyQncwRVA0eWZsSERsdUxOT0E/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
+  http.success ( data ) ->
+    feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry when feed.online isnt "0" )
     if window.location.hash.substring 1
       feed.status = feed.id in hashList() for feed in feeds
     else
@@ -44,64 +45,74 @@ app.controller 'main', ( $scope, $http, $compile ) ->
         continue if not feed?
         feed.status = if feed.status is "1" then true else false
         hashAppend feed.id if feed.status
-    $scope.loadItems id for id in hashList()
     $scope.feeds = feeds
-    
+    $scope.loadItems id for id in hashList()
+
   $scope.loadItems = ( id, current = false ) ->
-    http = $http.jsonp 'api/feed/'+id+'/?callback=JSON_CALLBACK'
-    http.error -> hashRemove id
-    http.success ( items ) ->
-      ( $scope.items.push item for item in items )
+    feed = item for item in $scope.feeds when item.id is id
+    http = $http.jsonp 'https://ajax.googleapis.com/ajax/services/feed/load?v=2.0&callback=JSON_CALLBACK&num=100&q='+( encodeURIComponent feed.feed )
+    http.error -> hashRemove feed.id
+    http.success ( data ) ->
+      ( $scope.items.push {
+        feed: feed.id
+        source: feed.url.replace /^http(?:s)?\:\/\/([^\/]+)\/*$/, '$1'
+        title: item.title
+        author: item.author
+        date: new Date item.publishedDate
+        url: item.link
+        image: ( item.content.match /<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/ )[1]
+      } for item in data.responseData.feed.entries )
       do updateImages
       $scope.setCurrent id if current
-      
+
   $scope.removeItems = ( id ) ->
     $scope.items = $scope.items.filter ( item ) -> item.feed isnt id
     do $scope.resetCurrent
-    
+
   $scope.resetCurrent = -> $scope.setCurrent false
-  $scope.setCurrent = ( id ) -> 
+  $scope.setCurrent = ( id ) ->
     if $scope.current = id
       [item, list] = [document.querySelector('#feed-'+id), document.querySelector('.nav-feeds')]
       list.scrollLeft = item.offsetLeft - list.offsetLeft - list.offsetWidth/2 + item.offsetWidth/2
     board.scrollTop = 0
     do updateImages
     do $scope.$apply if not $scope.$$phase
-   
+
   # Keyboard navigation
   window.addEventListener 'keydown', (e) ->
     switch e.which
       when 37 then ( target = if $scope.current then document.querySelector('#feed-'+$scope.current).previousSibling else document.querySelector('.nav-feed:last-child') )
       when 39 then ( target = if $scope.current then document.querySelector('#feed-'+$scope.current).nextSibling else document.querySelector('.nav-feed:first-child') )
     ( if target.getAttribute then $scope.setCurrent target.getAttribute('id').replace('feed-', '') else do $scope.resetCurrent ) if target
-    
- 
+]
+
+
 # Feed controller
-app.controller 'feed', ( $scope, $http ) ->
+app.controller 'feed', ['$scope', '$http', ( $scope, $http ) ->
   $scope.showItems = -> $scope.setCurrent $scope.feed.id
   $scope.toggleFeed = ->
     $scope.feed.status = not $scope.feed.status
     hashToggle $scope.feed.id
     if $scope.feed.status then $scope.loadItems $scope.feed.id, true else $scope.removeItems $scope.feed.id
-  
+]
 
 
 
 # Logo animation
-do -> 
+do ->
   logo = document.getElementById 'logo'
   wave = document.getElementById 'wave'
   boat = document.getElementById 'boat'
   t = 0
   token = false
-  
+
   logo.addEventListener 'mouseout', -> clearInterval token
   logo.addEventListener 'mouseover', ->
     speed = 1000/24
     shift = 4
     token = setInterval ( ->
       x = shift*Math.sin t*Math.PI*speed/1000/2
-      wave.setAttribute 'transform', 'translate(-'+x+')' 
-      boat.setAttribute 'transform', 'translate('+x+')' 
+      wave.setAttribute 'transform', 'translate(-'+x+')'
+      boat.setAttribute 'transform', 'translate('+x+')'
       t++
     ), speed
