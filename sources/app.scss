@@ -30,40 +30,40 @@ a { text-decoration: none; color: $dark; }
   z-index: 10; opacity: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;
   position: absolute; top: 0; left: 0;
   width: $gap*8; padding: ($gap - $base*$ratio) 0;
-  background: $dark; 
+  background: $dark;
   color: $light;
   -webkit-transform: translate3d(-50%, 0, 0);
   transform: translate3d(-50%, 0, 0);
   @extend .transition;
-  
-  p { 
-    margin: $base*$ratio 0; padding: 0 $gap; 
+
+  p {
+    margin: $base*$ratio 0; padding: 0 $gap;
     &.search { padding: 0 $gap/2; }
-    a {  
-      color: $light; 
-      &:hover, &:focus { text-decoration: underline; } 
+    a {
+      color: $light;
+      &:hover, &:focus { text-decoration: underline; }
     }
   }
   hr { display: block; margin: -1px $gap 0; border: 0 solid lighten($dark, 10%); border-bottom-width: 1px; }
 }
-.menu-feeds { 
+.menu-feeds {
   margin: $base*$ratio 0; padding: 0 $gap*4/5;
-  line-height: $base*$ratio*3/2; list-style: none; 
+  line-height: $base*$ratio*3/2; list-style: none;
 }
-.menu-feed { 
+.menu-feed {
   position: relative; left: 0; display: inline-block;
-  width: 100%; padding: 2px $gap/5; 
-  border-radius: 2px; 
+  width: 100%; padding: 2px $gap/5;
+  border-radius: 2px;
   line-height: 1; color: $light;
   @extend .ellipsis, .transition;
 }
 .menu-selected { background: $light; font-weight: bold; color: $dark; }
 .narration { color: lighten($dark, 50%); font-style: italic; }
-.search-input { 
+.search-input {
   width: 100%; height: $base*$ratio*2; padding: 0 $gap/2;
   border: 0; border-radius: 2px; background: $light;
   font: bold $base $font; line-height: $base*$ratio*2; color: lighten($dark, 20%);
-  
+
   &:hover, &:focus { outline: none; color: $dark; }
   &::-webkit-input-placeholder { color: desaturate(lighten($dark, 50%), 20%); }
   &::-moz-placeholder { color: desaturate(lighten($dark, 50%), 20%); }
@@ -75,15 +75,15 @@ a { text-decoration: none; color: $dark; }
 
 // Navigation
 // ------------------------------
-.nav { 
+.nav {
   z-index: 200; overflow: hidden;
   position: fixed; top: 0; left: 0; width: 100%; height: $gap*5/4;
   background: $dark;
-  line-height: $gap*5/4; 
+  line-height: $gap*5/4;
   @extend .transition;
 }
 .menu-btn {
-  display: block; float: left; 
+  display: block; float: left;
   width: $gap*5/4; height: 100%;
   background: $dark;
   @extend .txtcenter;
@@ -93,7 +93,7 @@ a { text-decoration: none; color: $dark; }
 .nav-reset {
   display: block; float: left;
   width: $gap*3/2; height: 100%;
-  @extend .txtcenter; 
+  @extend .txtcenter;
   color: $light;
 }
 .nav-feeds-box {
@@ -107,8 +107,8 @@ a { text-decoration: none; color: $dark; }
   height: $gap*5/4+30; padding: 0 $gap/4 30px;
   list-style: none; white-space: nowrap; font-weight: bold;
 }
-.nav-feed { 
-  display: inline-block; padding: 0 $gap/4; 
+.nav-feed {
+  display: inline-block; padding: 0 $gap/4;
   a { color: desaturate(darken($light, 30%), 20%); @extend .transition; }
   &.nav-current a { color: $light; }
 }
@@ -119,7 +119,7 @@ a { text-decoration: none; color: $dark; }
 // ------------------------------
 .board-overlay {
   z-index: 300; visibility: hidden; opacity: 0; cursor: pointer;
-  position: fixed; top: 0; left: 0; 
+  position: fixed; top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba($light, .6);
   @extend .transition;
@@ -129,35 +129,35 @@ a { text-decoration: none; color: $dark; }
   position: absolute; top: 0; left: 0;
   width: 100%; padding: $gap*(5/4+1/2) $gap/2 $gap/2;
   background: $light;
-  font-size: 0; 
+  font-size: 0;
   @extend .transition, .txtcenter;
 }
-.item { 
-  position: relative; display: inline-block; overflow: hidden; 
+.item {
+  position: relative; display: inline-block; overflow: hidden;
   max-width: 100%; width: $gap*10; height: $gap*10*3/4; margin: $gap/2 0;
-  border-radius: 2px; background: lighten($light, 10%); 
+  border-radius: 2px; background: lighten($light, 10%);
   text-align: left; vertical-align: top;
   @extend .transition;
 }
-.item-img { 
-  position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; 
+.item-img {
+  position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
   background: center center no-repeat; background-size: cover;
   @extend .transition;
   img { display: none; }
 }
-.item-title { 
+.item-title {
   @extend .ellipsis;
-  z-index: 10; position: absolute; bottom: -2px; left: -2px; right: -2px; 
-  height: $base*($ratio*2+1/2); padding: $base/2 2px 2px; 
-  background: $light; 
+  z-index: 10; position: absolute; bottom: -2px; left: -2px; right: -2px;
+  height: $base*($ratio*2+1/2); padding: $base/2 2px 2px;
+  background: $light;
   font-weight: bold; font-size: $base; color: lighten($dark, 20%);
   @extend .transition;
 }
 .item-info { color: desaturate(lighten($dark, 50%), 20%); font-weight: normal; font-size: $base - 1; }
 .intro {
-  padding: $gap; 
+  padding: $gap;
   background: $dark;
-   
+
   font-size: $base; color: $light;
 }
 .end { padding: $gap/2; font-style: italic; font-size: $base; color: desaturate(lighten($dark, 50%), 20%); }
@@ -170,13 +170,13 @@ a { text-decoration: none; color: $dark; }
   .menu-feed { &:hover, &:focus { background: $light; font-weight: bold; color: $dark; }}
   .menu-selected { opacity: .7; &:hover, &:focus { opacity: .2; -webkit-transform: translate3d($base/4, 0, 0); transform: translate3d($base/4, 0, 0); }}
   .nav-feed a { &:hover, &:focus { color: $light; } }
-  .item { margin: $gap/2; 
+  .item { margin: $gap/2;
     &:hover, &:focus {
       .item-title { -webkit-transform: translate3d(0, $base*($ratio*2+1/2), 0); transform: translate3d(0, $base*($ratio*2+1/2), 0); }
       .item-img { opacity: .8; -webkit-transform: scale(1.1) rotate(-2deg); transform: scale(1.1) rotate(-2deg); -webkit-transition: all 9s; transition: all 9s; }
     }
   }
-  
+
   // Fade in
   @mixin keyframe ( $name ) { @-webkit-keyframes $name { @content; } @keyframes $name { @content; } }
   @include keyframe( fadeIn ) { 0% { opacity: 0; } 100% { opacity: 1; } }
