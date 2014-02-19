@@ -50,11 +50,11 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
     $scope.loadItems id for id in hashList()
 
   $scope.loadItems = ( id, current = false ) ->
-    feed = item for item in $scope.feeds when item.id is id
+    feed = ( item for item in $scope.feeds when item.id is id ).pop()
     http = $http.jsonp 'https://ajax.googleapis.com/ajax/services/feed/load?v=2.0&callback=JSON_CALLBACK&num=100&q='+( encodeURIComponent feed.feed )
     http.error -> hashRemove feed.id
     http.success ( data ) ->
-      ( $scope.items.push {
+      $scope.items.push {
         feed: feed.id
         source: feed.url.replace /^http(?:s)?\:\/\/([^\/]+)\/*$/, '$1'
         title: item.title
@@ -62,7 +62,7 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
         date: new Date item.publishedDate
         url: item.link
         image: ( item.content.match /<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/ )[1]
-      } for item in data.responseData.feed.entries )
+      } for item in data.responseData.feed.entries
       do updateImages
       $scope.setCurrent id if current
 
