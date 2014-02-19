@@ -9,6 +9,6 @@ This project is licenced under [Creative Common BY-SA](http://creativecommons.or
 
 # Publishing instructions
 
-    compile /sources/app.coffee -> /public/app.js (unminified)
+    compile /sources/app.coffee -> /public/app.js
     compile /sources/app.scss -> /public/app.css
     
