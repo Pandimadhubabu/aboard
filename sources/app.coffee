@@ -37,8 +37,7 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
 
   http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/0AnqTdoRZw_IRdHctX2RyQncwRVA0eWZsSERsdUxOT0E/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
   http.success ( data ) ->
-    feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry )
-    # console.log feeds
+    feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry when feed.online isnt "0" )
     if window.location.hash.substring 1
       feed.status = feed.id in hashList() for feed in feeds
     else
@@ -56,7 +55,7 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
     http.success ( data ) ->
       ( $scope.items.push {
         feed: feed.id
-        source: feed.url.replace /^http(s)\:\/\/(.+)\/*$/, '$1'
+        source: feed.url.replace /^http(?:s)?\:\/\/([^\/]+)\/*$/, '$1'
         title: item.title
         author: item.author
         date: new Date item.publishedDate

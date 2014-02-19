@@ -1,7 +1,7 @@
 # Aboard.io
 [Aboard](http://aboard.io) is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.
 
-The project has been created in two days as a personal challenge. It runs on [AngularJS](http://angularjs.org) and [R76](https://github.com/noclat/r76) for the API. 
+The project has been created in two days as a personal challenge. It runs on [AngularJS](http://angularjs.org) and a simple [Google Spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0AnqTdoRZw_IRdHctX2RyQncwRVA0eWZsSERsdUxOT0E).
 
 Feel free to have a look at the source code. 
 
@@ -9,7 +9,6 @@ This project is licenced under [Creative Common BY-SA](http://creativecommons.or
 
 # Publishing instructions
 
-    create folder /api/cache/
-    compile /sources/app.coffee -> /app.js (unminified)
-    compile /sources/app.scss -> /app.css
+    compile /sources/app.coffee -> /public/app.js (unminified)
+    compile /sources/app.scss -> /public/app.css
     
