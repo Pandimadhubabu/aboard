@@ -5,4 +5,4 @@ The project has been created in two days as a personal challenge. It runs on [An
 
 Feel free to have a look at the source code. 
 
-This project is licensed under [Creative Common BY-SA](http://creativecommons.org/licenses/by-sa/3.0).
+Aboard is shared under the [MIT license](http://opensource.org/licenses/MIT).
