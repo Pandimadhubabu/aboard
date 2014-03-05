@@ -6,3 +6,10 @@ The project has been created in two days as a personal challenge. It runs on [An
 Feel free to have a look at the source code. 
 
 Aboard is shared under the [MIT license](http://opensource.org/licenses/MIT).
+
+## APIs
+
+- [Google Spreadsheet to JSON API](https://developers.google.com/gdata/samples/spreadsheet_sample)
+- Google RSS to JSON API :
+
+    https://ajax.googleapis.com/ajax/services/feed/load?v=2.0&q=RSS_FEED_URL&num=10
