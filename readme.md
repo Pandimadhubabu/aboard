@@ -11,6 +11,10 @@ Aboard is shared under the [MIT license](http://opensource.org/licenses/MIT).
 
 [Google Spreadsheet to JSON API](https://developers.google.com/gdata/samples/spreadsheet_sample)
 
-Google RSS to JSON API :
+Google RSS to JSON API:
 
     https://ajax.googleapis.com/ajax/services/feed/load?v=2.0&q=RSS_FEED_URL&num=10
+    
+Get favicon URL:
+
+    http://www.google.com/s2/favicons?domain=WEBSITE_URL
