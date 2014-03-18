@@ -77,7 +77,7 @@ a { text-decoration: none; color: $dark; }
 // ------------------------------
 .nav {
   overflow: hidden;
-  height: $gap*5/4; margin: $gap/2;
+  height: $gap*5/4; margin: $gap/2 0;
   line-height: $gap*5/4;
   border-bottom: 1px solid darken($light, 5%);
 }
@@ -168,6 +168,7 @@ a { text-decoration: none; color: $dark; }
   .menu-feed { &:hover, &:focus { background: $light; font-weight: bold; color: $dark; }}
   .menu-selected { opacity: .7; &:hover, &:focus { opacity: .2; -webkit-transform: translate3d($base/4, 0, 0); transform: translate3d($base/4, 0, 0); }}
   .nav-feed a { &:hover, &:focus { color: $dark; } }
+  .nav { margin: $gap/2; }
   .item { margin: $gap/2;
     &:hover, &:focus {
       .item-title { -webkit-transform: translate3d(0, $base*($ratio*2+1/2), 0); transform: translate3d(0, $base*($ratio*2+1/2), 0); }
