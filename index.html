@@ -42,7 +42,7 @@ Project under CC BY-SA license: creativecommons.org/licenses/by-sa/3.0
       <p class="narration">* mature content</p>
       <ul class="menu-feeds">
         <li ng-repeat="feed in feeds | filter:search | orderBy:'name'" ng-controller="feed">
-          <a href="" class="menu-feed" ng-class="{'menu-selected':feed.status}" ng-click="toggleFeed()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</a>
+          <a href="" class="menu-feed" ng-class="{'menu-selected':(feed.id | inHashList)}" ng-click="toggleFeed()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</a>
         </li>
       </ul>
       <hr>
@@ -54,24 +54,22 @@ Project under CC BY-SA license: creativecommons.org/licenses/by-sa/3.0
 
 
 
-    <!-- Nav -->
-    <nav class="nav">
-      <label for="menu-token" class="menu-btn noselect">&#9776;</label>
-      <a href="" class="nav-reset bold" ng-click="resetCurrent()">All</a>
-      <div class="nav-feeds-box">
-        <ul class="nav-feeds">
-          <li id="feed-{{ feed.id }}" class="nav-feed" ng-class="{'nav-current':feed.id==current}" ng-repeat="feed in feeds | filter:{ status:true } | orderBy:'name'" ng-controller="feed">
-            <a href="" ng-click="showItems()">{{ feed.tags | mature }}{{ feed.name }}</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-
-
     <!-- Board -->
     <label for="menu-token" class="board-overlay noselect"></label>
     <section class="board">
+      <!-- Nav -->
+      <nav class="nav">
+        <label for="menu-token" class="menu-btn noselect">&#9776;</label>
+        <a href="" class="nav-reset bold" ng-click="resetCurrent()">All</a>
+        <div class="nav-feeds-box">
+          <ul class="nav-feeds">
+            <li id="feed-{{ feed.id }}" class="nav-feed" ng-class="{'nav-current':feed.id==current}" ng-repeat="feed in feeds | hashList | orderBy:'name'" ng-controller="feed">
+              <a href="" ng-click="showItems()">{{ feed.tags | mature }}{{ feed.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
       <!-- yoggrt.com Zone Code -->
       <div class="item yoggrt"><div id="bsap_1290632" class="bsarocks bsap_7babe4b995e98c4846f8dc7310c45272"></div><a href="http://yoggrt.com" id="bsap_aplink">Ads via Yoggrt</a></div>
 

@@ -76,41 +76,39 @@ a { text-decoration: none; color: $dark; }
 // Navigation
 // ------------------------------
 .nav {
-  z-index: 200; overflow: hidden;
-  position: fixed; top: 0; left: 0; width: 100%; height: $gap*5/4;
-  background: $dark;
+  overflow: hidden;
+  height: $gap*5/4; margin: $gap/2;
   line-height: $gap*5/4;
-  @extend .transition;
+  border-bottom: 1px solid darken($light, 5%);
 }
 .menu-btn {
   display: block; float: left;
   width: $gap*5/4; height: 100%;
-  background: $dark;
   @extend .txtcenter;
-  font-size: $base; color: $light;
-  #menu-token:checked ~ & { position: absolute; }
+  font-size: $base; color: $dark;
 }
 .nav-reset {
   display: block; float: left;
   width: $gap*3/2; height: 100%;
   @extend .txtcenter;
-  color: $light;
+  font-size: $base; color: $dark;
 }
 .nav-feeds-box {
   position: relative;
-  height: 100%; margin-left: $gap*(5/4+3/2);
-  &:after, &:before { z-index: 10; content: ""; position: absolute; top: 0; bottom: 0; box-shadow: 0 0 5px 5px $dark; }
+  height: $gap*5/4; margin-left: $gap*(5/4+3/2);
+  &:after, &:before { z-index: 10; content: ""; position: absolute; top: 0; bottom: 0; box-shadow: 0 0 5px 5px $light; }
   &:before { left: 0; } &:after { right: 0; }
 }
 .nav-feeds {
   overflow-y: hidden; overflow-x: scroll; -webkit-overflow-scrolling: touch;
   height: $gap*5/4+30; padding: 0 $gap/4 30px;
   list-style: none; white-space: nowrap; font-weight: bold;
+  text-align: left;
 }
 .nav-feed {
-  display: inline-block; padding: 0 $gap/4;
-  a { color: desaturate(darken($light, 30%), 20%); @extend .transition; }
-  &.nav-current a { color: $light; }
+  display: inline-block; padding: 0 $gap/4; font-size: $base;
+  a { color: desaturate(lighten($dark, 30%), 20%); @extend .transition; }
+  &.nav-current a { color: $dark; }
 }
 
 
@@ -127,7 +125,7 @@ a { text-decoration: none; color: $dark; }
 .board {
   z-index: 100; overflow-y: scroll; -webkit-overflow-scrolling: touch;
   position: absolute; top: 0; left: 0;
-  width: 100%; padding: $gap*(5/4+1/2) $gap/2 $gap/2;
+  width: 100%; padding: $gap/2;
   background: $light;
   font-size: 0;
   @extend .transition, .txtcenter;
@@ -169,7 +167,7 @@ a { text-decoration: none; color: $dark; }
 @media screen and ( min-width: $breakpoint ) {
   .menu-feed { &:hover, &:focus { background: $light; font-weight: bold; color: $dark; }}
   .menu-selected { opacity: .7; &:hover, &:focus { opacity: .2; -webkit-transform: translate3d($base/4, 0, 0); transform: translate3d($base/4, 0, 0); }}
-  .nav-feed a { &:hover, &:focus { color: $light; } }
+  .nav-feed a { &:hover, &:focus { color: $dark; } }
   .item { margin: $gap/2;
     &:hover, &:focus {
       .item-title { -webkit-transform: translate3d(0, $base*($ratio*2+1/2), 0); transform: translate3d(0, $base*($ratio*2+1/2), 0); }
@@ -188,7 +186,7 @@ a { text-decoration: none; color: $dark; }
 // Sidebar open
 // ------------------------------
 #menu-token:checked ~ .wrapper .menu { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
-#menu-token:checked ~ .wrapper .nav, #menu-token:checked ~ .wrapper .board, #menu-token:checked ~ .wrapper .board-overlay { -webkit-transform: translate3d($gap*8, 0, 0); transform: translate3d($gap*8, 0, 0); }
+#menu-token:checked ~ .wrapper .board, #menu-token:checked ~ .wrapper .board-overlay { -webkit-transform: translate3d($gap*8, 0, 0); transform: translate3d($gap*8, 0, 0); }
 #menu-token:checked ~ .wrapper .board { overflow: hidden; }
 #menu-token:checked ~ .wrapper .board-overlay { opacity: 1; visibility: visible; }
 
