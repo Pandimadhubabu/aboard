@@ -182,9 +182,21 @@ a {
   padding: 0 7.5px;
   font-size: 12px; }
   .nav-feed a {
+    display: block;
+    height: 37.5px;
+    line-height: 37.5px;
     color: #5e5e5e; }
   .nav-feed.nav-current a {
+    position: relative;
     color: #121110; }
+    .nav-feed.nav-current a:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: #dbd9cf; }
 
 .board-overlay {
   z-index: 300;
