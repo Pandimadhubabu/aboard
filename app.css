@@ -42,7 +42,7 @@ a {
 .txtcenter, .menu-btn, .nav-reset, .board {
   text-align: center; }
 
-.transition, .menu, .menu-feed, .nav-feed a, .board-overlay, .board, .item, .item-img, .item-title {
+.transition, .menu, .menu-feed, .nav-reset, .nav-feed a, .board-overlay, .board, .item, .item-img, .item-title {
   -webkit-transition: all 0.5s cubic-bezier(0.3, 0.5, 0.2, 1);
   transition: all 0.5s cubic-bezier(0.3, 0.5, 0.2, 1); }
 
@@ -147,7 +147,19 @@ a {
   width: 45px;
   height: 100%;
   font-size: 12px;
+  color: #5e5e5e; }
+
+.nav-current {
+  position: relative;
   color: #121110; }
+  .nav-current:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: #dbd9cf; }
 
 .nav-feeds-box {
   position: relative;
@@ -182,21 +194,9 @@ a {
   padding: 0 7.5px;
   font-size: 12px; }
   .nav-feed a {
-    display: block;
-    height: 37.5px;
-    line-height: 37.5px;
     color: #5e5e5e; }
   .nav-feed.nav-current a {
-    position: relative;
     color: #121110; }
-    .nav-feed.nav-current a:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 2px;
-      background: #dbd9cf; }
 
 .board-overlay {
   z-index: 300;

@@ -60,7 +60,7 @@ Project under CC BY-SA license: creativecommons.org/licenses/by-sa/3.0
       <!-- Nav -->
       <nav class="nav">
         <label for="menu-token" class="menu-btn noselect">&#9776;</label>
-        <a href="" class="nav-reset bold" ng-click="resetCurrent()">All</a>
+        <a href="" class="nav-reset bold" ng-class="{'nav-current':!current}" ng-click="resetCurrent()">All</a>
         <div class="nav-feeds-box">
           <ul class="nav-feeds">
             <li id="feed-{{ feed.id }}" class="nav-feed" ng-class="{'nav-current':feed.id==current}" ng-repeat="feed in feeds | hashList | orderBy:'name'" ng-controller="feed">

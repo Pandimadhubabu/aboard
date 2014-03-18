@@ -90,8 +90,12 @@ a { text-decoration: none; color: $dark; }
 .nav-reset {
   display: block; float: left;
   width: $gap*3/2; height: 100%;
-  @extend .txtcenter;
-  font-size: $base; color: $dark;
+  @extend .txtcenter, .transition;
+  font-size: $base; color: desaturate(lighten($dark, 30%), 20%);
+}
+.nav-current {
+  position: relative; color: $dark;
+  &:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: darken($light, 10%); }
 }
 .nav-feeds-box {
   position: relative;
@@ -107,11 +111,8 @@ a { text-decoration: none; color: $dark; }
 }
 .nav-feed {
   display: inline-block; padding: 0 $gap/4; font-size: $base;
-  a { display: block; height: $gap*5/4; line-height: $gap*5/4; color: desaturate(lighten($dark, 30%), 20%); @extend .transition; }
-  &.nav-current a {
-    position: relative; color: $dark;
-    &:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: darken($light, 10%); }
-  }
+  a { color: desaturate(lighten($dark, 30%), 20%); @extend .transition; }
+  &.nav-current a { color: $dark; }
 }
 
 
