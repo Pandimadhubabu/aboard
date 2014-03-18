@@ -36,13 +36,13 @@ a {
   white-space: nowrap;
   text-overflow: ellipsis; }
 
-.bold {
+.bold, .nav-reset {
   font-weight: bold; }
 
 .txtcenter, .menu-btn, .nav-reset, .board {
   text-align: center; }
 
-.transition, .menu, .menu-feed, .nav-reset, .nav-feed a, .board-overlay, .board, .item, .item-img, .item-title {
+.transition, .menu, .menu-feed, .nav label, .nav a, .nav-reset, .board-overlay, .board, .item, .item-img, .item-title {
   -webkit-transition: all 0.5s cubic-bezier(0.3, 0.5, 0.2, 1);
   transition: all 0.5s cubic-bezier(0.3, 0.5, 0.2, 1); }
 
@@ -127,39 +127,20 @@ a {
     color: #919191; }
 
 .nav {
-  overflow: hidden;
+  position: relative;
   height: 37.5px;
   margin: 15px 0;
   line-height: 37.5px;
-  border-bottom: 1px solid #e6e4dd; }
+  border-bottom: 1px solid rgba(18, 17, 16, 0.05); }
+  .nav label, .nav a {
+    color: #5e5e5e; }
 
 .menu-btn {
   display: block;
   float: left;
   width: 37.5px;
   height: 100%;
-  font-size: 12px;
-  color: #121110; }
-
-.nav-reset {
-  display: block;
-  float: left;
-  width: 45px;
-  height: 100%;
-  font-size: 12px;
-  color: #5e5e5e; }
-
-.nav-current {
-  position: relative;
-  color: #121110; }
-  .nav-current:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    background: #dbd9cf; }
+  font-size: 12px; }
 
 .nav-feeds-box {
   position: relative;
@@ -171,7 +152,7 @@ a {
     content: "";
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 1px;
     box-shadow: 0 0 5px 5px #f1f0ec; }
   .nav-feeds-box:before {
     left: 0; }
@@ -189,14 +170,27 @@ a {
   font-weight: bold;
   text-align: left; }
 
-.nav-feed {
+.nav-feed, .nav-reset {
   display: inline-block;
   padding: 0 7.5px;
   font-size: 12px; }
-  .nav-feed a {
-    color: #5e5e5e; }
-  .nav-feed.nav-current a {
+
+.nav-reset {
+  float: left;
+  width: 45px;
+  padding: 0; }
+
+.nav-current {
+  position: relative; }
+  .nav-current a {
     color: #121110; }
+  .nav-current:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    border-bottom: 1px solid rgba(18, 17, 16, 0.2); }
 
 .board-overlay {
   z-index: 300;
@@ -289,11 +283,10 @@ a {
       -webkit-transform: translate3d(3px, 0, 0);
       transform: translate3d(3px, 0, 0); }
 
-  .nav-feed a:hover, .nav-feed a:focus {
-    color: #121110; }
-
   .nav {
     margin: 15px; }
+    .nav label:hover, .nav label:focus, .nav a:hover, .nav a:focus {
+      color: #121110; }
 
   .item {
     margin: 15px; }

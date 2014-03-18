@@ -76,31 +76,22 @@ a { text-decoration: none; color: $dark; }
 // Navigation
 // ------------------------------
 .nav {
-  overflow: hidden;
+  position: relative;
   height: $gap*5/4; margin: $gap/2 0;
   line-height: $gap*5/4;
-  border-bottom: 1px solid darken($light, 5%);
+  border-bottom: 1px solid rgba($dark, .05);
+  label, a { color: desaturate(lighten($dark, 30%), 20%); @extend .transition; }
 }
 .menu-btn {
+  @extend .txtcenter;
   display: block; float: left;
   width: $gap*5/4; height: 100%;
-  @extend .txtcenter;
-  font-size: $base; color: $dark;
-}
-.nav-reset {
-  display: block; float: left;
-  width: $gap*3/2; height: 100%;
-  @extend .txtcenter, .transition;
-  font-size: $base; color: desaturate(lighten($dark, 30%), 20%);
-}
-.nav-current {
-  position: relative; color: $dark;
-  &:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: darken($light, 10%); }
+  font-size: $base;
 }
 .nav-feeds-box {
-  position: relative;
-  overflow: hidden; height: $gap*5/4; margin-left: $gap*(5/4+3/2);
-  &:after, &:before { z-index: 10; content: ""; position: absolute; top: 0; bottom: 0; box-shadow: 0 0 5px 5px $light; }
+  position: relative; overflow: hidden;
+  height: $gap*5/4; margin-left: $gap*(5/4+3/2);
+  &:after, &:before { z-index: 10; content: ""; position: absolute; top: 0; bottom: 1px; box-shadow: 0 0 5px 5px $light; }
   &:before { left: 0; } &:after { right: 0; }
 }
 .nav-feeds {
@@ -111,10 +102,16 @@ a { text-decoration: none; color: $dark; }
 }
 .nav-feed {
   display: inline-block; padding: 0 $gap/4; font-size: $base;
-  a { color: desaturate(lighten($dark, 30%), 20%); @extend .transition; }
-  &.nav-current a { color: $dark; }
 }
-
+.nav-reset {
+  @extend .nav-feed, .txtcenter, .transition, .bold;
+  float: left; width: $gap*3/2; padding: 0;
+}
+.nav-current {
+  position: relative;
+  a { color: $dark; }
+  &:after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; border-bottom: 1px solid rgba($dark, .2); }
+}
 
 
 // Board
@@ -171,8 +168,7 @@ a { text-decoration: none; color: $dark; }
 @media screen and ( min-width: $breakpoint ) {
   .menu-feed { &:hover, &:focus { background: $light; font-weight: bold; color: $dark; }}
   .menu-selected { opacity: .7; &:hover, &:focus { opacity: .2; -webkit-transform: translate3d($base/4, 0, 0); transform: translate3d($base/4, 0, 0); }}
-  .nav-feed a { &:hover, &:focus { color: $dark; } }
-  .nav { margin: $gap/2; }
+  .nav { margin: $gap/2; label, a { &:hover, &:focus { color: $dark; }}}
   .item { margin: $gap/2;
     &:hover, &:focus {
       .item-title { -webkit-transform: translate3d(0, $base*($ratio*2+1/2), 0); transform: translate3d(0, $base*($ratio*2+1/2), 0); }
