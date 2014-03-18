@@ -40,12 +40,8 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
   http.success ( data ) ->
     feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry )
     feeds = ( feed for feed in feeds when feed.online isnt "0" )
-    if hashList().length
-      feed.status = feed.id in hashList() for feed in feeds
-    else
-      for feed in feeds
-        continue if not feed?
-        hashAppend feed.id if feed.status
+    if not hashList().length
+      hashAppend feed.id for feed in feeds when feed.status is "1"
     $scope.feeds = feeds
     do $scope.loadItems
 

@@ -101,7 +101,7 @@ a { text-decoration: none; color: $dark; }
 }
 .nav-feeds {
   overflow-y: hidden; overflow-x: scroll; -webkit-overflow-scrolling: touch;
-  height: $gap*5/4+30; padding: 0 $gap/4 30px;
+  height: $gap*5/4+30; padding: 0 $gap/4+30 30px $gap/4; margin-right: -30px;
   list-style: none; white-space: nowrap; font-weight: bold;
   text-align: left;
 }

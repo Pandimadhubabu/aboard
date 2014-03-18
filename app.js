@@ -110,7 +110,7 @@ app.controller('main', [
     $scope.current = false;
     http = $http.jsonp('http://spreadsheets.google.com/feeds/list/0AnqTdoRZw_IRdHctX2RyQncwRVA0eWZsSERsdUxOT0E/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK');
     http.success(function(data) {
-      var feed, feeds, _i, _j, _len, _len1, _ref;
+      var feed, feeds, _i, _len;
       feeds = (function() {
         var _i, _len, _ref, _results;
         _ref = data.feed.entry;
@@ -132,18 +132,10 @@ app.controller('main', [
         }
         return _results;
       })();
-      if (hashList().length) {
+      if (!hashList().length) {
         for (_i = 0, _len = feeds.length; _i < _len; _i++) {
           feed = feeds[_i];
-          feed.status = (_ref = feed.id, __indexOf.call(hashList(), _ref) >= 0);
-        }
-      } else {
-        for (_j = 0, _len1 = feeds.length; _j < _len1; _j++) {
-          feed = feeds[_j];
-          if (feed == null) {
-            continue;
-          }
-          if (feed.status) {
+          if (feed.status === "1") {
             hashAppend(feed.id);
           }
         }
