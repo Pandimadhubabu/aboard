@@ -7,18 +7,12 @@ board = document.querySelector('.board');
 updateImages = function() {
   return setTimeout((function() {
     var image, _i, _len, _ref, _results;
-    _ref = [].slice.call(document.getElementsByClassName('js-img'), 0);
+    _ref = document.querySelectorAll('.js-img');
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       image = _ref[_i];
-      if (image.getBoundingClientRect().top < window.innerHeight * 2) {
-        if (!image.style.backgroundImage) {
-          _results.push(image.style.backgroundImage = 'url(' + image.dataset.src + ')');
-        } else {
-          _results.push(void 0);
-        }
-      } else {
-        _results.push(void 0);
+      if (image.getBoundingClientRect().top < window.innerHeight * 2 && !image.style.backgroundImage) {
+        _results.push(image.style.backgroundImage = 'url(' + image.dataset.src + ')');
       }
     }
     return _results;

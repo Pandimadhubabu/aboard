@@ -1,11 +1,6 @@
 # Prevent off-screen image to load
 board = document.querySelector '.board'
-updateImages = ->
-  setTimeout ( ->
-    for image in [].slice.call document.getElementsByClassName( 'js-img' ), 0
-      if image.getBoundingClientRect().top < window.innerHeight*2
-        image.style.backgroundImage = 'url('+image.dataset.src+')' if not image.style.backgroundImage
-  ), 0
+updateImages = -> setTimeout ( -> image.style.backgroundImage = 'url('+image.dataset.src+')' for image in document.querySelectorAll '.js-img' when image.getBoundingClientRect().top < window.innerHeight*2 and not image.style.backgroundImage ), 0
 board.addEventListener 'scroll', updateImages
 board.addEventListener 'touchmove', updateImages
 window.addEventListener 'resize', updateImages
@@ -73,6 +68,7 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
     do updateImages
     do $scope.$apply if not $scope.$$phase
 
+  # Hashchance
   window.addEventListener 'hashchange', ->
     localStorage['hash'] = window.location.hash.substring 1
     do $scope.loadItems
