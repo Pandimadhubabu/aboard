@@ -18,6 +18,7 @@ hashList = -> id for id in window.location.hash.substring( 1 ).split '-' when id
 hashToggle = ( id ) -> if id in hashList() then hashRemove id else hashAppend id
 hashRemove = ( id ) -> window.location.hash = hashList().filter( ( a ) -> a isnt id ).join '-'
 hashAppend = ( id ) -> window.location.hash = hashList().concat( id ).sort( ( a, b ) -> parseInt( a, 16 ) - parseInt( b, 16 ) ).join '-' if id not in hashList()
+hashLoad = ( ids ) -> window.location.hash = ids.sort( ( a, b ) -> parseInt( a, 16 ) - parseInt( b, 16 ) ).join '-'
 window.location.hash = localStorage['hash'] if localStorage['hash']? and not hashList().length
 
 
@@ -38,12 +39,8 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
 
   http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/0AnqTdoRZw_IRdHctX2RyQncwRVA0eWZsSERsdUxOT0E/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
   http.success ( data ) ->
-    feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry )
-    feeds = ( feed for feed in feeds when feed.online isnt "0" )
-    if not hashList().length
-      hashAppend feed.id for feed in feeds when feed.status is "1"
-    $scope.feeds = feeds
-    do $scope.loadItems
+    $scope.feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry ).filter ( feed ) -> feed.online isnt "0"
+    hashLoad ( feed.id for feed in $scope.feeds when feed.status is "1" ) if not hashList().length
 
   $scope.loadFeed = ( id ) ->
     feed = ( item for item in $scope.feeds when item.id is id ).pop()
@@ -76,7 +73,6 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
     do updateImages
     do $scope.$apply if not $scope.$$phase
 
-  $scope.setCallback = ( fn ) -> $scope.callback = fn
   window.addEventListener 'hashchange', ->
     localStorage['hash'] = window.location.hash.substring 1
     do $scope.loadItems
