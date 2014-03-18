@@ -37,7 +37,7 @@ a { text-decoration: none; color: $dark; }
   @extend .transition;
 
   p {
-    margin: $base*$ratio 0; padding: 0 $gap;
+    margin: $base*$ratio 0; padding: 0 $gap; color: lighten($dark, 50%);
     &.search { padding: 0 $gap/2; }
     a {
       color: $light;
@@ -46,6 +46,7 @@ a { text-decoration: none; color: $dark; }
   }
   hr { display: block; margin: -1px $gap 0; border: 0 solid lighten($dark, 10%); border-bottom-width: 1px; }
 }
+.narrative { font-style: italic; }
 .menu-feeds {
   margin: $base*$ratio 0; padding: 0 $gap*4/5;
   line-height: $base*$ratio*3/2; list-style: none;
@@ -58,7 +59,6 @@ a { text-decoration: none; color: $dark; }
   @extend .ellipsis, .transition;
 }
 .menu-selected { background: $light; font-weight: bold; color: $dark; }
-.narration { color: lighten($dark, 50%); font-style: italic; }
 .search-input {
   width: 100%; height: $base*$ratio*2; padding: 0 $gap/2;
   border: 0; border-radius: 2px; background: $light;

@@ -66,7 +66,8 @@ a {
   transform: translate3d(-50%, 0, 0); }
   .menu p {
     margin: 16.8px 0;
-    padding: 0 30px; }
+    padding: 0 30px;
+    color: #97918a; }
     .menu p.search {
       padding: 0 15px; }
     .menu p a {
@@ -78,6 +79,9 @@ a {
     margin: -1px 30px 0;
     border: 0 solid #2d2b28;
     border-bottom-width: 1px; }
+
+.narrative {
+  font-style: italic; }
 
 .menu-feeds {
   margin: 16.8px 0;
@@ -99,10 +103,6 @@ a {
   background: #f1f0ec;
   font-weight: bold;
   color: #121110; }
-
-.narration {
-  color: #97918a;
-  font-style: italic; }
 
 .search-input {
   width: 100%;
