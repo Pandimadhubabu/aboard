@@ -95,13 +95,13 @@ a { text-decoration: none; color: $dark; }
 }
 .nav-feeds-box {
   position: relative;
-  height: $gap*5/4; margin-left: $gap*(5/4+3/2);
+  overflow: hidden; height: $gap*5/4; margin-left: $gap*(5/4+3/2);
   &:after, &:before { z-index: 10; content: ""; position: absolute; top: 0; bottom: 0; box-shadow: 0 0 5px 5px $light; }
   &:before { left: 0; } &:after { right: 0; }
 }
 .nav-feeds {
   overflow-y: hidden; overflow-x: scroll; -webkit-overflow-scrolling: touch;
-  height: $gap*5/4+30; padding: 0 $gap/4+30 30px $gap/4; margin-right: -30px;
+  height: $gap*5/4+30; padding: 0 $gap/4;
   list-style: none; white-space: nowrap; font-weight: bold;
   text-align: left;
 }
