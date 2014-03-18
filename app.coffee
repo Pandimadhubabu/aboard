@@ -95,16 +95,11 @@ app.controller 'feed', ['$scope', '$http', ( $scope, $http ) ->
 
 # Logo animation
 do ->
-  logo = document.getElementById 'logo'
-  wave = document.getElementById 'wave'
-  boat = document.getElementById 'boat'
-  t = 0
-  token = false
-
+  [logo, wave, boat] = ( document.getElementById id for id in ['logo', 'wave', 'boat'] )
+  [t, token] = [0, false]
   logo.addEventListener 'mouseout', -> clearInterval token
   logo.addEventListener 'mouseover', ->
-    speed = 1000/24
-    shift = 4
+    [speed, shift] = [1000/24, 4]
     token = setInterval ( ->
       x = shift*Math.sin t*Math.PI*speed/1000/2
       wave.setAttribute 'transform', 'translate(-'+x+')'
