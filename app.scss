@@ -204,7 +204,7 @@ a { text-decoration: none; color: $dark; }
 
 // Yoggrt.com Ad
 // ------------------------------
-.yoggrt { padding: $gap/2; background: lighten($light, 10%); text-align: center; }
+.yoggrt { padding: $gap $gap/2 $gap/2; background: lighten($light, 10%); text-align: center; }
 body .one .bsa_it_ad, body .one .bsa_it_ad .bsa_it_i, body .one .bsa_it_ad .bsa_it_t, body .one .bsa_it_ad .bsa_it_d { display: block; float: none; margin: 0; padding: 0; border: none; background: transparent; }
 body .one .bsa_it_ad, body .one .bsa_it_ad .bsa_it_i { margin-bottom: $gap/2; }
 body .one .bsa_it_ad .bsa_it_d { font-size: 12px; color: #333; }
