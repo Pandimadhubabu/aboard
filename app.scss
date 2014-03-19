@@ -79,7 +79,7 @@ a { text-decoration: none; color: $dark; }
   position: relative;
   height: $gap*5/4; margin: $gap/2 0;
   line-height: $gap*5/4;
-  border-bottom: 1px solid rgba($dark, .05);
+  &:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 1px solid rgba($dark, .05); }
   label, a { color: desaturate(lighten($dark, 30%), 20%); @extend .transition; }
 }
 .menu-btn {
@@ -91,8 +91,17 @@ a { text-decoration: none; color: $dark; }
 .nav-feeds-box {
   position: relative; overflow: hidden;
   height: $gap*5/4; margin-left: $gap*(5/4+3/2);
-  &:after, &:before { z-index: 10; content: ""; position: absolute; top: 0; bottom: 1px; box-shadow: 0 0 5px 5px $light; }
-  &:before { left: 0; } &:after { right: 0; }
+  &:after, &:before { z-index: 10; content: ""; position: absolute; top: 0; width: 8px; bottom: 1px; }
+  &:before {
+    left: 0;
+    background: -webkit-linear-gradient(left, rgba(241,240,236,1) 0%,rgba(241,240,236,1) 30%,rgba(241,240,236,0.01) 100%);
+    background: linear-gradient(to right, rgba(241,240,236,1) 0%,rgba(241,240,236,1) 30%,rgba(241,240,236,0.01) 100%);
+  }
+  &:after {
+    right: 0;
+    background: -webkit-linear-gradient(right, rgba(241,240,236,1) 0%,rgba(241,240,236,1) 30%,rgba(241,240,236,0.01) 100%);
+    background: linear-gradient(to left, rgba(241,240,236,1) 0%,rgba(241,240,236,1) 30%,rgba(241,240,236,0.01) 100%);
+  }
 }
 .nav-feeds {
   overflow-y: hidden; overflow-x: scroll; -webkit-overflow-scrolling: touch;
@@ -101,7 +110,7 @@ a { text-decoration: none; color: $dark; }
   text-align: left;
 }
 .nav-feed {
-  display: inline-block; padding: 0 $gap/4; font-size: $base;
+  display: inline-block; height: $gap*5/4; padding: 0 $gap/4; font-size: $base;
 }
 .nav-reset {
   @extend .nav-feed, .txtcenter, .transition, .bold;
@@ -110,7 +119,7 @@ a { text-decoration: none; color: $dark; }
 .nav-current {
   position: relative;
   a { color: $dark; }
-  &:after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; border-bottom: 1px solid rgba($dark, .2); }
+  &:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 1px solid rgba($dark, .2); }
 }
 
 

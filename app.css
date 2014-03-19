@@ -130,8 +130,14 @@ a {
   position: relative;
   height: 37.5px;
   margin: 15px 0;
-  line-height: 37.5px;
-  border-bottom: 1px solid rgba(18, 17, 16, 0.05); }
+  line-height: 37.5px; }
+  .nav:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-bottom: 1px solid rgba(18, 17, 16, 0.05); }
   .nav label, .nav a {
     color: #5e5e5e; }
 
@@ -152,12 +158,16 @@ a {
     content: "";
     position: absolute;
     top: 0;
-    bottom: 1px;
-    box-shadow: 0 0 5px 5px #f1f0ec; }
+    width: 8px;
+    bottom: 1px; }
   .nav-feeds-box:before {
-    left: 0; }
+    left: 0;
+    background: -webkit-linear-gradient(left, #f1f0ec 0%, #f1f0ec 30%, rgba(241, 240, 236, 0.01) 100%);
+    background: linear-gradient(to right, #f1f0ec 0%, #f1f0ec 30%, rgba(241, 240, 236, 0.01) 100%); }
   .nav-feeds-box:after {
-    right: 0; }
+    right: 0;
+    background: -webkit-linear-gradient(right, #f1f0ec 0%, #f1f0ec 30%, rgba(241, 240, 236, 0.01) 100%);
+    background: linear-gradient(to left, #f1f0ec 0%, #f1f0ec 30%, rgba(241, 240, 236, 0.01) 100%); }
 
 .nav-feeds {
   overflow-y: hidden;
@@ -172,6 +182,7 @@ a {
 
 .nav-feed, .nav-reset {
   display: inline-block;
+  height: 37.5px;
   padding: 0 7.5px;
   font-size: 12px; }
 
@@ -189,7 +200,7 @@ a {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1px;
+    bottom: 0;
     border-bottom: 1px solid rgba(18, 17, 16, 0.2); }
 
 .board-overlay {
