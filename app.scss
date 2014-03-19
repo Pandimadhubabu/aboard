@@ -29,7 +29,7 @@ a { text-decoration: none; color: $dark; }
 .menu {
   z-index: 10; opacity: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;
   position: absolute; top: 0; left: 0;
-  width: $gap*8; padding: ($gap - $base*$ratio) 0;
+  width: $gap*8+30; padding: ($gap - $base*$ratio) 30px ($gap - $base*$ratio) 0;
   background: $dark;
   color: $light;
   -webkit-transform: translate3d(-50%, 0, 0);

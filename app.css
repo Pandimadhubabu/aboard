@@ -58,8 +58,8 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  width: 240px;
-  padding: 13.2px 0;
+  width: 270px;
+  padding: 13.2px 30px 13.2px 0;
   background: #121110;
   color: #f1f0ec;
   -webkit-transform: translate3d(-50%, 0, 0);
