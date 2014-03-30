@@ -111,16 +111,17 @@ a { text-decoration: none; color: $dark; }
   text-align: left;
 }
 .nav-feed {
+  @extend .transition;
   display: inline-block; height: $gap*5/4; padding: 0 $gap/4; font-size: $base;
+  border-bottom: 1px solid transparent;
 }
 .nav-reset {
   @extend .nav-feed, .txtcenter, .transition, .bold;
   float: left; width: $gap*3/2; padding: 0;
 }
 .nav-current {
-  position: relative;
+  position: relative; border-bottom-color: rgba($dark, .3);
   a { color: $dark; }
-  &:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 1px solid rgba($dark, .2); }
 }
 
 
