@@ -7,7 +7,6 @@ window.addEventListener 'resize', updateImages
 
 
 
-
 # Hash manipulation
 hashList = -> id for id in window.location.hash.substring( 1 ).split '-' when id
 hashToggle = ( id ) -> if id in hashList() then hashRemove id else hashAppend id
@@ -32,7 +31,7 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
   $scope.items = []
   $scope.current = false
 
-  http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/0AnqTdoRZw_IRdHctX2RyQncwRVA0eWZsSERsdUxOT0E/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
+  http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
   http.success ( data ) ->
     $scope.feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry ).filter ( feed ) -> feed.online isnt "0"
     if hashList().length then do $scope.loadItems else hashLoad ( feed.id for feed in $scope.feeds when feed.status is "1" )
