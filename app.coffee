@@ -1,4 +1,4 @@
-# Prevent off-screen image to load
+# Prevent off-screen images to load
 board = document.querySelector '.board'
 updateImages = -> setTimeout ( -> image.style.backgroundImage = 'url('+image.dataset.src+')' for image in document.querySelectorAll '.js-img' when image.getBoundingClientRect().top < window.innerHeight*2 and not image.style.backgroundImage ), 0
 board.addEventListener 'scroll', updateImages
