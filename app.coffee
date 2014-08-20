@@ -1,12 +1,3 @@
-# Prevent off-screen images to load
-board = document.querySelector '.board'
-updateImages = -> setTimeout ( -> image.style.backgroundImage = 'url('+image.dataset.src+')' for image in document.querySelectorAll '.js-img' when image.getBoundingClientRect().top < window.innerHeight*2 and not image.style.backgroundImage ), 0
-board.addEventListener 'scroll', updateImages
-board.addEventListener 'touchmove', updateImages
-window.addEventListener 'resize', updateImages
-
-
-
 # Hash manipulation
 hashList = -> id for id in window.location.hash.substring( 1 ).split '-' when id
 hashToggle = ( id ) -> if id in hashList() then hashRemove id else hashAppend id
@@ -25,14 +16,16 @@ app.filter 'hashList', -> ( feeds ) -> feed for feed in feeds when feed.id in ha
 app.filter 'inHashList', -> ( id ) -> id in hashList()
 
 
+
+
 # Main controller
+paginate = 5
 app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile ) ->
-  $scope.feeds = []
-  $scope.items = []
-  $scope.current = false
+  [$scope.feeds, $scope.items, $scope.loading, $scope.current, $scope.fit, $scope.limit] = [[], [], false, false, paginate-1, paginate-1]
 
   http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
   http.success ( data ) ->
+    $scope.feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry ).filter ( feed ) -> feed.online isnt "0"
     $scope.feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry ).filter ( feed ) -> feed.online isnt "0"
     if hashList().length then do $scope.loadItems else hashLoad ( feed.id for feed in $scope.feeds when feed.status is "1" )
 
@@ -52,26 +45,36 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
       } for item in data.responseData.feed.entries
       $scope.items = $scope.items.filter ( item ) -> item.image
       $scope.setCurrent $scope.current
+      $scope.loading--
 
   $scope.loadItems = ->
     $scope.items = $scope.items.filter ( item ) -> item.feed in hashList()
+    $scope.loading = hashList().filter( ( feed ) ->  feed not in ( item.feed for item in $scope.items ) ).length
     $scope.loadFeed id for id in hashList() when id not in ( item.feed for item in $scope.items )
+    do $scope.fill if $scope.limit is paginate-1
     do $scope.$apply if not $scope.$$phase
 
   $scope.resetCurrent = -> $scope.setCurrent false
   $scope.setCurrent = ( id ) ->
-    $scope.current = id
-    [item, list] = [document.querySelector('#feed-'+id), document.querySelector('.nav-feeds')]
+    [$scope.current, document.body.scrollTop, item, list] = [id, 0, document.querySelector('#feed-'+id), document.querySelector('.nav-feeds')]
     list.scrollLeft = item.offsetLeft - list.offsetLeft - list.offsetWidth/2 + item.offsetWidth/2 if item
-    board.scrollTop = 0
-    do updateImages
+    $scope.limit = $scope.fit if not $scope.loading
     do $scope.$apply if not $scope.$$phase
+
+  # Paginate
+  $scope.more = ->
+    $scope.limit += paginate
+    do $scope.$apply if not $scope.$$phase
+  $scope.fill = ->
+    do $scope.more if not $scope.loading
+    if document.body.scrollHeight <= window.innerHeight then setTimeout arguments.callee, 10 else $scope.fit = $scope.limit
+  window.addEventListener 'scroll', -> do $scope.more if document.body.scrollTop > document.body.scrollHeight - window.innerHeight*1.2 and $scope.limit < $scope.items.length
+
 
   # Hashchance
   window.addEventListener 'hashchange', ->
     localStorage['hash'] = window.location.hash.substring 1
     do $scope.loadItems
-    do $scope.$apply if not $scope.$$phase
 
   # Keyboard navigation
   window.addEventListener 'keydown', (e) ->

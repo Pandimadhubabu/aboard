@@ -11,15 +11,14 @@ $breakpoint: $gap*19;
 // Common
 // ------------------------------
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; }
-html, body, .wrapper, .menu, .board { height: 100%; }
+html, body, .menu { height: 100%; }
 body { background: $light; font: $base $font; line-height: $ratio; color: $dark; }
-.wrapper { overflow: hidden; position: relative; background: $dark; }
 a { text-decoration: none; color: $dark; }
 .noselect { cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: -moz-none; -ms-user-select: none; user-select: none; }
 .ellipsis { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .bold { font-weight: bold; }
 .txtcenter { text-align: center; }
-.transition { -webkit-transition: all .5s cubic-bezier(.3,.5,.2,1); transition: all .5s cubic-bezier(.3,.5,.2,1); }
+.transition { -webkit-transition: opacity .5s cubic-bezier(.3,.5,.2,1) -webkit-transform .5s cubic-bezier(.3,.5,.2,1); transition: opacity .5s cubic-bezier(.3,.5,.2,1), transform .5s cubic-bezier(.3,.5,.2,1); }
 
 
 
@@ -27,13 +26,13 @@ a { text-decoration: none; color: $dark; }
 // ------------------------------
 .logo { display: block; margin: $base*$ratio auto; }
 .menu {
-  z-index: 10; opacity: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;
-  position: absolute; top: 0; left: 0;
-  width: $gap*8+30; padding: ($gap - $base*$ratio) 0;
+  opacity: .2; overflow: hidden;
+  position: fixed; top: 0; left: 0;
+  width: $gap*8; padding: ($gap - $base*$ratio) 0;
   background: $dark;
   color: $light;
-  -webkit-transform: translate3d(-50%, 0, 0);
-  transform: translate3d(-50%, 0, 0);
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
   @extend .transition;
 
   p {
@@ -46,7 +45,7 @@ a { text-decoration: none; color: $dark; }
   }
   hr { display: block; margin: -1px $gap 0; border: 0 solid lighten($dark, 10%); border-bottom-width: 1px; }
 }
-.menu-wrapper { width: $gap*8; }
+.menu-wrapper { width: $gap*8+30; padding-right: 30px; height: 100%; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
 .narrative { font-style: italic; }
 .menu-feeds {
   margin: $base*$ratio 0; padding: 0 $gap*4/5;
@@ -129,15 +128,10 @@ a { text-decoration: none; color: $dark; }
 // ------------------------------
 .board-overlay {
   z-index: 300; visibility: hidden; opacity: 0; cursor: pointer;
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba($light, .6);
-  @extend .transition;
+  position: fixed; top: 0; bottom: 0; left: $gap*8; right: 0;
 }
 .board {
-  z-index: 100; overflow-y: scroll; -webkit-overflow-scrolling: touch;
-  position: absolute; top: 0; left: 0;
-  width: 100%; padding: $gap/2;
+  max-width: $gap*11*5+$gap; margin: auto; padding: $gap/2;
   background: $light;
   font-size: 0;
   @extend .transition, .txtcenter;
@@ -152,24 +146,19 @@ a { text-decoration: none; color: $dark; }
 .item-img {
   position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
   background: center center no-repeat; background-size: cover;
+  -webkit-transform: none; transform: none;
   @extend .transition;
-  img { display: none; }
 }
 .item-title {
   @extend .ellipsis;
-  z-index: 10; position: absolute; bottom: -2px; left: -2px; right: -2px;
+  position: absolute; bottom: 0; left: 0; right: 0;
   height: $base*($ratio*2+1/2); padding: $base/2 2px 2px;
   background: $light;
   font-weight: bold; font-size: $base; color: lighten($dark, 20%);
+  -webkit-transform: none; transform: none;
   @extend .transition;
 }
 .item-info { color: desaturate(lighten($dark, 50%), 20%); font-weight: normal; font-size: $base - 1; }
-.intro {
-  padding: $gap;
-  background: $dark;
-
-  font-size: $base; color: $light;
-}
 .end { padding: $gap/2; font-style: italic; font-size: $base; color: desaturate(lighten($dark, 50%), 20%); }
 
 
@@ -182,25 +171,22 @@ a { text-decoration: none; color: $dark; }
   .nav { margin: $gap/2; label, a { &:hover, &:focus { color: $dark; }}}
   .item { margin: $gap/2;
     &:hover, &:focus {
+      .item-img { opacity: .8; -webkit-transform: scale(1.1) rotateZ(-2deg); transform: scale(1.1) rotateZ(-2deg); -webkit-transition: opacity 9s, -webkit-transform 9s; transition: opacity 9s, transform 9s; }
       .item-title { -webkit-transform: translate3d(0, $base*($ratio*2+1/2), 0); transform: translate3d(0, $base*($ratio*2+1/2), 0); }
-      .item-img { opacity: .8; -webkit-transform: scale(1.1) rotate(-2deg); transform: scale(1.1) rotate(-2deg); -webkit-transition: all 9s; transition: all 9s; }
     }
   }
-
-  // Fade in
-  @mixin keyframe ( $name ) { @-webkit-keyframes $name { @content; } @keyframes $name { @content; } }
-  @include keyframe( fadeIn ) { 0% { opacity: 0; } 100% { opacity: 1; } }
-  .fade-in { -webkit-animation: fadeIn .3s backwards; animation: fadeIn .3s backwards; }
 }
 
 
 
 // Sidebar open
 // ------------------------------
-#menu-token:checked ~ .wrapper .menu { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
-#menu-token:checked ~ .wrapper .board, #menu-token:checked ~ .wrapper .board-overlay { -webkit-transform: translate3d($gap*8, 0, 0); transform: translate3d($gap*8, 0, 0); }
-#menu-token:checked ~ .wrapper .board { overflow: hidden; }
-#menu-token:checked ~ .wrapper .board-overlay { opacity: 1; visibility: visible; }
+#menu-token:checked ~ .wrapper {
+  height: 100%; overflow: hidden;
+  .menu { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+  .board-overlay { opacity: 1; visibility: visible; }
+  .board { opacity: 0.4; -webkit-transform: translate3d($gap*8, 0, 0); transform: translate3d($gap*8, 0, 0); }
+}
 
 
 

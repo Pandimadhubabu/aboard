@@ -12,7 +12,7 @@ Project under MIT license: opensource.org/licenses/MIT
   <meta name="author" content="Nicolas Torres">
 
   <meta name="robots" content="index, follow">
-  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
 
   <meta name="og:title" content="Aboard — Inspiration board">
   <meta name="og:description" content="Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.">
@@ -77,9 +77,8 @@ Project under MIT license: opensource.org/licenses/MIT
       <div class="item yoggrt"><script src="http://cdn.yoggrt.com/yoggrt.js?legacyid=1290632&zoneid=1353&key=7babe4b995e98c4846f8dc7310c45272&serve=C6SD52Y&placement=aboardio" id="_yoggrt_js"></script></div>
 
       <!-- items -->
-      <article class="item" ng-repeat="item in items | filter:{ feed:current }:true | orderBy:'date':true" ng-animate="{ enter: 'fade-in' }">
-        <a href="{{ item.url }}" target="_blank">
-          <figure class="item-img js-img" data-src="{{ item.image }}"></figure>
+      <article class="item" ng-repeat="item in items | filter:{ feed:current }:true | orderBy:'date':true | limitTo:limit">
+        <a href="{{ item.url }}" class="item-img" style="background-image:url({{ item.image }})" target="_blank">
           <h1 class="item-title">{{ item.title }}<br><span class="item-info">{{ item.date | date:'MMM d' }} — {{ item.source }}</span></h1>
         </a>
       </article>
