@@ -21,7 +21,7 @@ app.filter 'inHashList', -> ( id ) -> id in hashList()
 # Main controller
 paginate = 5
 app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile ) ->
-  [$scope.feeds, $scope.items, $scope.loading, $scope.current, $scope.fit, $scope.limit] = [[], [], false, false, paginate-1, paginate-1]
+  [$scope.feeds, $scope.items, $scope.loading, $scope.current, $scope.fit, $scope.limit] = [[], [], false, 0, paginate-1, paginate-1]
 
   http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
   http.success ( data ) ->
@@ -46,12 +46,12 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
       $scope.items = $scope.items.filter ( item ) -> item.image
       $scope.setCurrent $scope.current
       $scope.loading--
+      do $scope.fill if not $scope.loading and $scope.limit is paginate-1
 
   $scope.loadItems = ->
     $scope.items = $scope.items.filter ( item ) -> item.feed in hashList()
     $scope.loading = hashList().filter( ( feed ) ->  feed not in ( item.feed for item in $scope.items ) ).length
     $scope.loadFeed id for id in hashList() when id not in ( item.feed for item in $scope.items )
-    do $scope.fill if $scope.limit is paginate-1
     do $scope.$apply if not $scope.$$phase
 
   $scope.resetCurrent = -> $scope.setCurrent false
@@ -66,8 +66,8 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
     $scope.limit += paginate
     do $scope.$apply if not $scope.$$phase
   $scope.fill = ->
-    do $scope.more if not $scope.loading
-    if document.body.scrollHeight <= window.innerHeight then setTimeout arguments.callee, 10 else $scope.fit = $scope.limit
+    do $scope.more
+    if document.body.scrollHeight <= window.innerHeight*1.1 then setTimeout arguments.callee, 10 else $scope.fit = $scope.limit
   window.addEventListener 'scroll', -> do $scope.more if document.body.scrollTop > document.body.scrollHeight - window.innerHeight*1.2 and $scope.limit < $scope.items.length
 
 
