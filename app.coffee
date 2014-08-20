@@ -9,6 +9,31 @@ window.location.hash = localStorage['hash'] if localStorage['hash']? and not has
 
 
 
+# Progress bar
+do ->
+  bar = document.createElement 'div'
+  bar.className = 'progress'
+  document.body.appendChild bar
+
+  window.progress =
+    speed: 500
+    start: -> @go 0.01
+    done: -> @go 1
+    val: -> 0.01*parseInt bar.style.width or 0
+    cancel: ( delay = 0 ) ->
+      setTimeout ( -> bar.style.opacity = 0 ), delay+300
+      setTimeout ( -> bar.style.width = 0 ), delay+300+@speed
+    go: ( x, speed = false ) ->
+      @speed = speed if speed isnt false
+      bar.style.webKitTransition = bar.style.transition = 'opacity .3s, width '+@speed/1000+'s'
+      bar.style.opacity = 1
+      x = Math.min( 1, Math.max( 0, x ) )
+      bar.style.width = x*100+'%'
+      progress.cancel progress.speed if x is 1
+
+
+
+
 # Angular app & filters
 app = angular.module 'aboard', []
 app.filter 'mature', -> ( tags ) -> if 'mature' in tags.split ' ' then '*' else ''
@@ -21,7 +46,7 @@ app.filter 'inHashList', -> ( id ) -> id in hashList()
 # Main controller
 paginate = 5
 app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile ) ->
-  [$scope.feeds, $scope.items, $scope.loading, $scope.current, $scope.fit, $scope.limit] = [[], [], false, 0, paginate-1, paginate-1]
+  [$scope.feeds, $scope.items, $scope.total, $scope.loading, $scope.current, $scope.fit, $scope.limit] = [[], [], false, 0, 0, paginate-1, paginate-1]
 
   http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
   http.success ( data ) ->
@@ -46,11 +71,14 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
       $scope.items = $scope.items.filter ( item ) -> item.image
       $scope.setCurrent $scope.current
       $scope.loading--
+      progress.go 1-$scope.loading/$scope.total
       do $scope.fill if not $scope.loading and $scope.limit is paginate-1
 
   $scope.loadItems = ->
+    do progress.start
     $scope.items = $scope.items.filter ( item ) -> item.feed in hashList()
     $scope.loading = hashList().filter( ( feed ) ->  feed not in ( item.feed for item in $scope.items ) ).length
+    $scope.total = $scope.loading
     $scope.loadFeed id for id in hashList() when id not in ( item.feed for item in $scope.items )
     do $scope.$apply if not $scope.$$phase
 
@@ -92,6 +120,7 @@ app.controller 'feed', ['$scope', '$http', ( $scope, $http ) ->
     hashToggle $scope.feed.id
     $scope.setCurrent if $scope.feed.id in hashList() then $scope.feed.id else false
 ]
+
 
 
 
