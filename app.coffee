@@ -1,3 +1,5 @@
+board = document.querySelector '.board'
+
 # Hash manipulation
 hashList = -> id for id in window.location.hash.substring( 1 ).split '-' when id
 hashToggle = ( id ) -> if id in hashList() then hashRemove id else hashAppend id
@@ -46,7 +48,7 @@ app.filter 'inHashList', -> ( id ) -> id in hashList()
 # Main controller
 paginate = 5
 app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile ) ->
-  [$scope.feeds, $scope.items, $scope.total, $scope.loading, $scope.current, $scope.fit, $scope.limit] = [[], [], false, 0, 0, paginate-1, paginate-1]
+  [$scope.feeds, $scope.items, $scope.total, $scope.loading, $scope.current, $scope.fit, $scope.limit] = [[], [], false, 0, 0, paginate-1, false]
 
   http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
   http.success ( data ) ->
@@ -72,7 +74,9 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
       $scope.setCurrent $scope.current
       $scope.loading--
       progress.go 1-$scope.loading/$scope.total
-      do $scope.fill if not $scope.loading and $scope.limit is paginate-1
+      if not $scope.loading
+        $scope.limit = $scope.fit
+        do $scope.fill
 
   $scope.loadItems = ->
     do progress.start
@@ -95,7 +99,7 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
     do $scope.$apply if not $scope.$$phase
   $scope.fill = ->
     do $scope.more
-    if document.body.scrollHeight <= window.innerHeight*1.1 then setTimeout arguments.callee, 10 else $scope.fit = $scope.limit
+    if board.clientHeight <= window.innerHeight*1.1 then setTimeout arguments.callee, 10 else $scope.fit = $scope.limit
   window.addEventListener 'scroll', -> do $scope.more if document.body.scrollTop > document.body.scrollHeight - window.innerHeight*1.2 and $scope.limit < $scope.items.length
 
 
