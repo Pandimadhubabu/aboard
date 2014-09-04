@@ -198,5 +198,5 @@ a { text-decoration: none; color: $dark; }
 body .one .bsa_it_ad, body .one .bsa_it_ad .bsa_it_i, body .one .bsa_it_ad .bsa_it_t, body .one .bsa_it_ad .bsa_it_d { display: block; float: none; margin: 0; padding: 0; border: none; background: transparent; }
 body .one .bsa_it_ad, body .one .bsa_it_ad .bsa_it_i { margin-bottom: $gap/2; }
 body .one .bsa_it_ad .bsa_it_d { font-size: 12px; color: #333; }
-body .one .bsa_it_p { display: none; }
+body .one .bsa_it_p { position: absolute; bottom: auto; top: 100%; left: 0; right: 0; padding-top: 5px; text-align: center; }
 body #bsap_aplink { font-size: 10px; }
