@@ -68,7 +68,7 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
         author: item.author
         date: new Date item.publishedDate
         url: item.link
-        image: if images = ( item.content.match /<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/ ) then images[1] else false
+        image: if images = ( item.content.match /<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/ ) then images[1].replace /\&amp;/g, '&' else false
       } for item in data.responseData.feed.entries
       $scope.items = $scope.items.filter ( item ) -> item.image
       $scope.setCurrent $scope.current
