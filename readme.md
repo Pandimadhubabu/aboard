@@ -3,8 +3,6 @@
 
 The project has been created in two days as a personal challenge. It runs on [AngularJS](http://angularjs.org) and a simple [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18).
 
-Feel free to have a look at the source code. 
-
 Aboard is shared under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## APIs
