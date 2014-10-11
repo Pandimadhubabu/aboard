@@ -40,7 +40,7 @@ Project under MIT license: opensource.org/licenses/MIT
 
       <!-- combine feeds -->
       <p class="search"><input type="text" class="search-input" ng-model="search" placeholder="Filter"></p>
-      <p class="narrative">* mature content</p>
+      <p class="narrative">* risk of wild creatures</p>
       <ul class="menu-feeds">
         <li ng-repeat="feed in feeds | filter:search | orderBy:'name'" ng-controller="feed">
           <a href="" class="menu-feed" ng-class="{'menu-selected':(feed.id | inHashList)}" ng-click="toggleFeed()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</a>
