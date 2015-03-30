@@ -53,7 +53,6 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
   http = $http.jsonp 'http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK'
   http.success ( data ) ->
     $scope.feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry ).filter ( feed ) -> feed.online isnt "0"
-    $scope.feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in data.feed.entry ).filter ( feed ) -> feed.online isnt "0"
     if hashList().length then do $scope.loadItems else hashLoad ( feed.id for feed in $scope.feeds when feed.status is "1" )
 
   $scope.loadFeed = ( id ) ->

@@ -72,10 +72,7 @@ Project under MIT license: opensource.org/licenses/MIT
           </ul>
         </div>
       </nav>
-
-      <!-- yoggrt.com Zone Code -->
-      <div class="item yoggrt"><script src="http://cdn.yoggrt.com/yoggrt.js?legacyid=1290632&zoneid=1353&key=7babe4b995e98c4846f8dc7310c45272&serve=C6SD52Y&placement=aboardio" id="_yoggrt_js"></script></div>
-
+      
       <!-- items -->
       <article class="item" ng-repeat="item in items | filter:{ feed:current }:true | orderBy:'date':true | limitTo:limit">
         <a href="{{ item.url }}" class="item-img" style="background-image:url({{ item.image }})" target="_blank">
