@@ -74,9 +74,6 @@ Project under MIT license: opensource.org/licenses/MIT
       </nav>
 
       <!-- items -->
-      <article class="item">
-        <a href="mailto:captain@aboard.io" class="item-img" style="background-image:url(forsale.png)"></a>
-      </article>
       <article class="item" ng-repeat="item in items | filter:{ feed:current }:true | orderBy:'date':true | limitTo:limit">
         <a href="{{ item.url }}" class="item-img" style="background-image:url({{ item.image }})" target="_blank">
           <h1 class="item-title">{{ item.title }}<br><span class="item-info">{{ item.date | date:'MMM d' }} — {{ item.source }}</span></h1>
