@@ -49,6 +49,14 @@ a { text-decoration: none; color: $dark; }
 }
 .menu-wrapper { width: $gap*8+30; padding-right: 30px; height: 100%; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
 .narrative { font-style: italic; }
+.donate {
+  @extend .txtcenter; display: block;
+  height: $base*$ratio*2; margin: $gap/2; padding: 0 $gap/4;
+  border: 0; border-radius: 2px; background: $light;
+  font: bold $base*.875 $font; line-height: $base*$ratio*2; color: lighten($dark, 20%);
+  text-transform: uppercase;
+  &:hover, &:focus { outline: none; color: $dark; }
+}
 .menu-feeds {
   margin: $base*$ratio 0; padding: 0 $gap*4/5;
   line-height: $base*$ratio*3/2; list-style: none;
