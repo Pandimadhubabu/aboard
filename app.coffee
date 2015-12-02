@@ -1,3 +1,10 @@
+### TODO convert XML to JSON
+https://davidwalsh.name/convert-xml-json
+https://developer.mozilla.org/fr/docs/JXON
+http://goessner.net/download/prj/jsonxml/
+https://github.com/metatribal/xmlToJSON
+###
+
 board = document.querySelector '.board'
 
 # Hash manipulation
