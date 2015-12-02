@@ -22,6 +22,18 @@ Project under MIT license: opensource.org/licenses/MIT
   <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAt9JREFUeNrUVs1P02AYp11hc2vXdpjwEXWfQAeRuL9gcJGEP2EM9IY39bY/whn1gEdhHJgXPKAk4AEjGPXAiYgI6kgcYcJgH+264tbOB5oAjnV9m4AJb5P16fq+z+95fs9XsWaWbbjIhTdc8CLUWwWu814YXP/BA1QAk8kkSdJ+JlupVDAMO3+AQkF0uVx9fcFMNlcqlXAcP2cAsVjEcdPCwrvnY2PSweE6/VZRFPAPfs86h6lpqhtkIMfjdv34mQD5xvVrv5JbBI6VlZNTLEPbbFZBKBw7pwaZ0LUdSAdOQHA6nQ8f3H/y9Jn6P82wbrfL4/VyXVx3T4/DwYZCIUk6sFqv1EjTmlHNZDJlWVEfLRaLr6PjZm9vOBwOBoN+v9/t9rS3tx3vj0YfpdN7DpZGogioBFvsdmpoKNzFcd1+f0dnp8PhANSa1vA839baUpQklmHAY32KIFwFUYw+jo6O3kNJgfm5uYJYZGjqWLtOFuV5nqHtodAQYo7NvJ45YpVATVNZVgKBAEVRKNrB6s+fPqqCgTpwezyI5q+vr29sfDc3NRorNNpOIwN8k5UKpJkxAPSGk0xuHSrSaB6aADyfRwTIZjN1DMLP1BdeLpdBWFr6gAhQ1ZdqD5wTc3J5l9M5FX9Z/9g/NuEmAwBQq3t7+zardXBwEBGg7ahhaM2JagCKJHlB6OvvHxkenojFtJTm8/nNzcT2dspiMUOXIQgCFUCWZdJma2psjE1OJhKJ94uLtR0nCKjbVCq1uvrl1fQ07NfKIs1mB0gQj7t3Rl6MT+hQ1Nrye2cX5oGBoQ/+QjAo0jY+EYvHp7RUC4IwMHB7ZzcNjcvwyAQMs9kMQiQSWVv7Cv21asPy8nIgcGt+/i1jp+qMaJ2RCVzlcjlg3OvzcRwHc59lWakorayszM6+KZXlq80stLiabU6lSB8ADouiKB38qXplMTeRJHnWM2MAl+DLjjiNdim/rv8KMAC56y+yeBJXmQAAAABJRU5ErkJggg==">
 </head>
 <body ng-controller="main" ng-cloak>
+
+  <!-- Message -->
+  <section class="message">
+    <p>
+      Aboard is unavailable because Google closed their Feed API. Sorry for the downtime.
+      <br>Feel free to reach me at <a href="mailto:captain@aboard.io">captain@aboard.io</a>.
+    </p>
+    <p>
+      <br><em>&lt;geek alert&gt;I am looking for an API to convert RSS Feed to JSON. Any idea would be very welcome.&lt;/geek alert&gt;</em>
+    </p>
+  </section>
+
   <input type="checkbox" id="menu-token" ng-model="token" ng-hide="true">
   <main class="wrapper">
 
@@ -95,8 +107,10 @@ Project under MIT license: opensource.org/licenses/MIT
   </script>
 
   <!-- Scripts -->
+  <!--
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
   <script src="app.js"></script>
+  -->
 
 
 </body>
