@@ -56,10 +56,22 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
 
   $scope.loadFeed = ( id ) ->
     feed = ( item for item in $scope.feeds when item.id is id ).pop()
+
+    # quick fix
+    if not feed?
+      $scope.loading--
+      progress.go 1-$scope.loading/$scope.total
+      if not $scope.loading
+        $scope.limit = $scope.fit
+        do $scope.fill
+      return
+
+    # seems to fail with $http.get
+    # some feeds randomly return 404 through cors-anywhere…
     req = new XMLHttpRequest()
     req.open 'GET', 'http://cors-anywhere.herokuapp.com/'+feed.feed
+    # req.onerror = -> hashRemove feed.id
     req.onerror = req.onload = ->
-      console.log feed.name
       data = xmlToJSON.parseString req.responseText, {xmlns:false,childrenAsArray:false,textKey:'t'}
       $scope.items.push {
         feed: feed.id
