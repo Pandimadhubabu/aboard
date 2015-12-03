@@ -8,16 +8,6 @@ $breakpoint: $gap*19;
 
 
 
-// Message
-// ------------------------------
-$base: 16px;
-.wrapper, #menu-token { display: none; }
-body { display: table; width: 100%; text-align: center; font-size: $base; line-height: $ratio*$base; }
-.message { display: table-cell; height: 100%; vertical-align: middle; padding: $ratio*16px; }
-.message a { font-weight: bold; text-decoration: underline; }
-
-
-
 // Common
 // ------------------------------
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; }

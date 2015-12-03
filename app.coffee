@@ -1,10 +1,3 @@
-### TODO convert XML to JSON
-https://davidwalsh.name/convert-xml-json
-https://developer.mozilla.org/fr/docs/JXON
-http://goessner.net/download/prj/jsonxml/
-https://github.com/metatribal/xmlToJSON
-###
-
 board = document.querySelector '.board'
 
 # Hash manipulation
@@ -14,7 +7,6 @@ hashRemove = ( id ) -> window.location.hash = hashList().filter( ( a ) -> a isnt
 hashAppend = ( id ) -> window.location.hash = hashList().concat( id ).sort( ( a, b ) -> parseInt( a, 16 ) - parseInt( b, 16 ) ).join '-' if id not in hashList()
 hashLoad = ( ids ) -> window.location.hash = ids.sort( ( a, b ) -> parseInt( a, 16 ) - parseInt( b, 16 ) ).join '-'
 window.location.hash = localStorage['hash'] if localStorage['hash']? and not hashList().length
-
 
 
 
@@ -64,18 +56,19 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
 
   $scope.loadFeed = ( id ) ->
     feed = ( item for item in $scope.feeds when item.id is id ).pop()
-    http = $http.jsonp 'https://ajax.googleapis.com/ajax/services/feed/load?v=2.0&callback=JSON_CALLBACK&num=100&q='+( encodeURIComponent feed.feed )
-    http.error -> hashRemove feed.id
-    http.success ( data ) ->
+    req = new XMLHttpRequest()
+    req.open 'GET', 'http://cors-anywhere.herokuapp.com/'+feed.feed
+    req.onerror = req.onload = ->
+      console.log feed.name
+      data = xmlToJSON.parseString req.responseText, {xmlns:false,childrenAsArray:false,textKey:'t'}
       $scope.items.push {
         feed: feed.id
         source: feed.url.replace /^http(?:s)?\:\/\/([^\/]+)\/*$/, '$1'
-        title: item.title
-        author: item.author
-        date: new Date item.publishedDate
-        url: item.link
-        image: if images = ( item.content.match /<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/ ) then images[1].replace /\&amp;/g, '&' else false
-      } for item in data.responseData.feed.entries
+        title: item.title.t
+        date: new Date item.pubDate.t
+        url: item.link.t
+        image: if images = ( (item.description.t or item.encoded.t).match /<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/ ) then images[1].replace /\&amp;/g, '&' else false
+      } for item in data.rss.channel.item when item.title? and item.pubDate? and item.link? if data.rss?
       $scope.items = $scope.items.filter ( item ) -> item.image
       $scope.setCurrent $scope.current
       $scope.loading--
@@ -83,11 +76,12 @@ app.controller 'main', ['$scope', '$http', '$compile', ( $scope, $http, $compile
       if not $scope.loading
         $scope.limit = $scope.fit
         do $scope.fill
+    req.send(null)
 
   $scope.loadItems = ->
     do progress.start
     $scope.items = $scope.items.filter ( item ) -> item.feed in hashList()
-    $scope.loading = hashList().filter( ( feed ) ->  feed not in ( item.feed for item in $scope.items ) ).length
+    $scope.loading = hashList().filter( ( feed ) -> feed not in ( item.feed for item in $scope.items ) ).length
     $scope.total = $scope.loading
     $scope.loadFeed id for id in hashList() when id not in ( item.feed for item in $scope.items )
     do $scope.$apply if not $scope.$$phase
