@@ -12,6 +12,6 @@ Aboard is shared under the [MIT license](http://opensource.org/licenses/MIT).
 
 [Google Spreadsheet to JSON API](https://developers.google.com/gdata/samples/spreadsheet_sample)
 
-Google RSS to JSON API:
+---
 
-    https://ajax.googleapis.com/ajax/services/feed/load?v=2.0&q=RSS_FEED_URL&num=100
+**Google closed its Feed API**, so Aboard now uses [xmlToJSON](https://github.com/metatribal/xmlToJSON) script by William Summers. Some popular feeds have broken in the process, and Dribbble seems to have closed its Recent and Debut feeds. So Aboard is kind of sinking, but I keep it live for the record.
