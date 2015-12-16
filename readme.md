@@ -1,6 +1,6 @@
 # Aboard.io
 
-[![Donate to this project using Paypal](https://img.shields.io/badge/paypal-donate-blue.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=captain%40aboard%2eio&lc=FR&item_name=aboard%2eio&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
+[![Donate to this project using Paypal](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=captain%40aboard%2eio&lc=FR&item_name=aboard%2eio&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
 [![MIT license](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 [Aboard](http://aboard.io) is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.
