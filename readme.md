@@ -9,5 +9,5 @@ The project has been created in two days as a personal challenge. It runs on [An
 
 ## APIs
 
-[Google Spreadsheet to JSON API](https://developers.google.com/gdata/samples/spreadsheet_sample)
-[feedrapp](https://github.com/sdepold/feedrapp)
+- [Google Spreadsheet to JSON API](https://developers.google.com/gdata/samples/spreadsheet_sample)
+- [feedrapp](https://github.com/sdepold/feedrapp)
