@@ -10,7 +10,4 @@ The project has been created in two days as a personal challenge. It runs on [An
 ## APIs
 
 [Google Spreadsheet to JSON API](https://developers.google.com/gdata/samples/spreadsheet_sample)
-
----
-
-**Google closed its Feed API**, so Aboard now uses [xmlToJSON](https://github.com/metatribal/xmlToJSON) script by William Summers. Some popular feeds have broken in the process, and Dribbble seems to have closed its Recent and Debut feeds. So Aboard is kind of sinking, but I keep it live for the record.
+[Feedr](https://github.com/sdepold/feedrapp)
