@@ -118,7 +118,9 @@ a { text-decoration: underline; color: $dark; &:hover { text-decoration: none; }
 .tile-date { @extend %align-middle; color: $grey; }
 .tile-title { @extend %align-middle; }
 
-.feeds { margin: $unit*4 $unit/2 $unit*2; }
+.feeds { margin: $unit*4 auto $unit*2; padding: 0 $unit/2; }
+@media ( min-width: $w2 ) { .feeds { max-width: $w2; } }
+@media ( min-width: $w3 ) { .feeds { max-width: $w3; } }
 .feeds-header { margin-bottom: $unit*2; color: $grey; p { margin-bottom: $unit/2; } }
 .feed { @extend %block, %pointer, %ellipsis; margin-bottom: 2px; padding: 0 $unit 0 $unit/2; background: $shade; line-height: $unit*2; }
 .feed-icon { @extend %icon, %align-middle; fill: $grey; }
