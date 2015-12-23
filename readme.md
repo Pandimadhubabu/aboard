@@ -16,7 +16,7 @@ Feel free to contact me at [captain@aboard.io](mailto:captain@aboard.io).
 - Lazy loading images to avoid consuming mobile data
 - Switched from Google Feed API to [feedrapp](https://github.com/sdepold/feedrapp) (may experience downtimes due to Heroku free plan)
 
-## What RSS feeds are compatible?
+## Which RSS feeds are compatible?
 
 To make your RSS feed compatible with Aboard, please follow these rules:
 - put your images in `<img>` tags inside the `<description>` tag of your XML tree;
