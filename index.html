@@ -1,103 +1,115 @@
-<!--
-Aboard.io by Nicolas Torres — ntorres.me
-Full source on Github: github.com/noclat/aboard.io
-Project under MIT license: opensource.org/licenses/MIT
--->
+<!-- Aboard.io by Nicolas Torres: github.com/noclat/aboard.io (MIT license) -->
 <!DOCTYPE html>
-<html lang="en" ng-app="aboard">
-<head>
-  <meta charset="utf-8">
-  <title>Aboard — Inspiration board</title>
-  <meta name="description" content="Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.">
-  <meta name="author" content="Nicolas Torres">
+<meta charset='utf-8'>
+<title>Aboard — Inspiration board</title>
+<meta name='description' content='Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.'>
+<meta name='author' content='Nicolas Torres'>
+<meta name='robots' content='index, follow'>
+<meta name='viewport' content='initial-scale=1.0,maximum-scale=1.0,user-scalable=no'>
+<meta name='og:title' content='Aboard — Inspiration board'>
+<meta name='og:description' content='Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.'>
+<meta name='og:image' content='http://aboard.io/facebook.png'>
+<link href='app.css' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700' rel='stylesheet' type='text/css'>
+<link rel='icon' type='image/x-icon' href='favicon.png'>
+<link rel='apple-touch-icon-precomposed' href='icon.png'>
 
-  <meta name="robots" content="index, follow">
-  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
 
-  <meta name="og:title" content="Aboard — Inspiration board">
-  <meta name="og:description" content="Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.">
-  <meta name="og:image" content="http://aboard.io/facebook.jpg">
 
-  <link rel="stylesheet" href="app.css">
-  <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAt9JREFUeNrUVs1P02AYp11hc2vXdpjwEXWfQAeRuL9gcJGEP2EM9IY39bY/whn1gEdhHJgXPKAk4AEjGPXAiYgI6kgcYcJgH+264tbOB5oAjnV9m4AJb5P16fq+z+95fs9XsWaWbbjIhTdc8CLUWwWu814YXP/BA1QAk8kkSdJ+JlupVDAMO3+AQkF0uVx9fcFMNlcqlXAcP2cAsVjEcdPCwrvnY2PSweE6/VZRFPAPfs86h6lpqhtkIMfjdv34mQD5xvVrv5JbBI6VlZNTLEPbbFZBKBw7pwaZ0LUdSAdOQHA6nQ8f3H/y9Jn6P82wbrfL4/VyXVx3T4/DwYZCIUk6sFqv1EjTmlHNZDJlWVEfLRaLr6PjZm9vOBwOBoN+v9/t9rS3tx3vj0YfpdN7DpZGogioBFvsdmpoKNzFcd1+f0dnp8PhANSa1vA839baUpQklmHAY32KIFwFUYw+jo6O3kNJgfm5uYJYZGjqWLtOFuV5nqHtodAQYo7NvJ45YpVATVNZVgKBAEVRKNrB6s+fPqqCgTpwezyI5q+vr29sfDc3NRorNNpOIwN8k5UKpJkxAPSGk0xuHSrSaB6aADyfRwTIZjN1DMLP1BdeLpdBWFr6gAhQ1ZdqD5wTc3J5l9M5FX9Z/9g/NuEmAwBQq3t7+zardXBwEBGg7ahhaM2JagCKJHlB6OvvHxkenojFtJTm8/nNzcT2dspiMUOXIQgCFUCWZdJma2psjE1OJhKJ94uLtR0nCKjbVCq1uvrl1fQ07NfKIs1mB0gQj7t3Rl6MT+hQ1Nrye2cX5oGBoQ/+QjAo0jY+EYvHp7RUC4IwMHB7ZzcNjcvwyAQMs9kMQiQSWVv7Cv21asPy8nIgcGt+/i1jp+qMaJ2RCVzlcjlg3OvzcRwHc59lWakorayszM6+KZXlq80stLiabU6lSB8ADouiKB38qXplMTeRJHnWM2MAl+DLjjiNdim/rv8KMAC56y+yeBJXmQAAAABJRU5ErkJggg==">
-</head>
-<body ng-controller="main" ng-cloak>
-  <input type="checkbox" id="menu-token" ng-model="token" ng-hide="true">
-  <main class="wrapper">
+<!-- App -->
+<main id='app'>
 
-    <!-- Sidebar -->
-    <header class="menu">
-    <div class="menu-wrapper">
-      <!-- welcome -->
-      <figure><svg id="logo" class="logo" width="66px" height="60px" viewBox="0 0 310 280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M309.448426,237.498833 C309.448426,237.498833 289.432686,215.719844 263.23332,215.719844 C224.774764,215.719844 201.201665,254.910039 154.992017,254.910039 C108.782369,254.910039 85.2092708,215.719844 46.7507145,215.719844 C20.5513483,215.719844 0.535608875,237.498833 0.535608875,237.498833 C-0.171715068,238.207004 -0.176081266,239.3793 0.508320143,240.108171 L10.247123,250.480156 C10.9293413,251.206848 12.0361723,251.205759 12.7151159,250.47144 C12.7151159,250.47144 22.0751511,238.333385 47.22663,238.333385 C80.1161018,238.333385 108.278074,279.05323 154.992017,279.05323 C201.705961,279.05323 229.867933,238.333385 262.757405,238.333385 C287.909975,238.333385 297.268919,250.47144 297.268919,250.47144 C297.947862,251.205759 299.055785,251.206848 299.738003,250.480156 L309.475715,240.108171 C310.160116,239.3793 310.15575,238.207004 309.448426,237.498833 C309.448426,237.498833 310.15575,238.207004 309.448426,237.498833 L309.448426,237.498833 L309.448426,237.498833 Z M309.448426,237.498833" id="wave" fill="#F1F0EC"></path><path d="M105.266285,253.368005 C86.1684364,208.036929 43.2208763,185.439192 43.2208763,185.439192 C42.2587946,184.899956 41.4788732,183.575251 41.4788732,182.455626 L41.4788732,176.059804 C41.4788732,174.951262 42.368435,174.052611 43.4820144,174.05261 L66.4732123,174.052603 C66.4732123,174.052603 53.0973481,108.790133 77.1332527,65.5062775 L141.861105,54.323414 L142.532168,1.02921337 C142.54608,-0.075709351 143.258592,-0.407158967 144.116804,0.283425512 L166.231722,18.0788254 C167.092979,18.7718609 167.791167,20.2367204 167.791167,21.3281209 L167.791167,29.0964044 C167.791167,30.1979053 166.885947,31.0908482 165.797921,31.0908482 L148.486331,31.0908482 L148.486331,52.8887207 L269.275616,33.0052064 C269.275616,33.0052064 224.832113,99.8249135 238.815578,207.134373 L181.68814,203.395997 L229.630371,216.184274 C230.693116,216.467754 231.554642,217.593676 231.554642,218.706028 L231.554642,225.639468 C231.554642,226.748714 230.872041,228.228142 230.025022,228.94676 C230.025022,228.94676 214.157923,242.462424 200.566853,253.368005 C174.36754,274.540792 105.266285,253.368005 105.266285,253.368005 Z M105.266285,253.368005" id="boat" fill="#F1F0EC"></path></svg></figure>
-      <p class="narrative txtcenter">Welcome aboard!<br>Combine some RSS feeds and sail the seas of inspiration!</p>
-      <p class="txtcenter">
-        Share:
-        <a href="http://twitter.com/share?text=Aboard, combine RSS feeds for inspiration&url=http%3A%2F%2Faboard.io" target="_blank">Twitter</a> —
-        <a href="http://facebook.com/sharer.php?u=http%3A%2F%2Faboard.io" target="_blank">Facebook</a>
-      </p>
-      <a class="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=captain%40aboard%2eio&lc=FR&item_name=aboard%2eio&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted" target="_blank">Donate with Paypal</a>
-      <hr>
-
-      <!-- combine feeds -->
-      <p class="search"><input type="text" class="search-input" ng-model="search" placeholder="Filter"></p>
-      <p class="narrative">* risk of wild creatures</p>
-      <ul class="menu-feeds">
-        <li ng-repeat="feed in feeds | filter:search | orderBy:'name'" ng-controller="feed">
-          <a href="" class="menu-feed" ng-class="{'menu-selected':(feed.id | inHashList)}" ng-click="toggleFeed()" title="{{ feed.name }}">{{ feed.tags | mature }}{{ feed.name }}</a>
-        </li>
-      </ul>
-      <hr>
-
-      <!-- contact -->
-      <p class="narrative">You can't find your favorite RSS feed? Please send it to me and I'll do my best to add it fast:</p>
-      <p><a href="mailto:captain@aboard.io">captain@aboard.io</a></p>
-      <p>The source is available on <a href="http://github.com/noclat/aboard.io" target="_blank">Github</a>.</p>
+  <!-- nav -->
+  <nav class='nav'>
+    <!-- select feeds -->
+    <div class='nav-settings' v-show='settings'>
+      <button class='nav-settings-btn' v-if='settings' @click.stop='settings = false'>
+        <svg class='nav-settings-icon' width='24' height='24' viewBox='0 0 24 24'><path d='M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z'/></svg>
+      </button>
+      <input type='text' class='nav-settings-search' id='search' v-model='search' placeholder='Filter feeds…'>
     </div>
-    </header>
+
+    <!-- browse feed -->
+    <div v-else class='nav-tabs' id='nav'>
+      <button class='nav-settings-btn' @click.stop='settings = true'>
+        <svg class='nav-settings-icon' width='24' height='24' viewBox='0 0 24 24'><path d='M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z'/></svg>
+      </button>
+      <button class='nav-tab' id='feed-false' :class='{ "nav-tab-current": current == false }' @click.stop='setCurrent(false)'>
+        <span class='nav-tab-name'>All</span>
+      </button>
+      <button class='nav-tab' id='feed-{{ feed.id }}' :class='{ "nav-tab-current": feed.id == current }' v-for='feed in feeds | feedsOn | orderBy "name"' @click.stop='setCurrent(feed.id)'>
+        <img v-show='loaded.indexOf(feed.id) > -1' class='nav-tab-icon' src='http://www.google.com/s2/favicons?domain={{ feed.domain }}' width='16' height='16' alt='{{ item.source }}'>
+        <svg v-else class='nav-tab-wait' width='24' height='24' viewBox='0 0 24 24'><path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/></svg>
+        <span class='nav-tab-name'>{{ feed.name }}<span v-if='feed.mature == "1"'>*</span></span>
+      </button>
+    </div>
+  </nav>
 
 
-
-    <!-- Board -->
-    <label for="menu-token" class="board-overlay noselect"></label>
-    <section class="board">
-      <!-- Nav -->
-      <nav class="nav">
-        <label for="menu-token" class="menu-btn noselect">&#9776;</label>
-        <div class="nav-reset" ng-class="{'nav-current':!current}"><a href="" ng-click="resetCurrent()">All</a></div>
-        <div class="nav-feeds-box">
-          <ul class="nav-feeds">
-            <li id="feed-{{ feed.id }}" class="nav-feed" ng-class="{'nav-current':feed.id==current}" ng-repeat="feed in feeds | hashList | orderBy:'name'" ng-controller="feed">
-              <a href="" ng-click="showItems()">{{ feed.tags | mature }}{{ feed.name }}</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <!-- items -->
-      <article class="item" ng-repeat="item in items | filter:{ feed:current }:true | orderBy:'date':true | limitTo:limit" ng-init="n=0">
-        <a href="{{ item.url }}" class="item-img" style="background-image:url({{ item.image }})" target="_blank" ng-init="n=n+1">
-          <h1 class="item-title">{{ item.title }}<br><span class="item-info">{{ item.date | date:'MMM d' }} — {{ item.source }}</span></h1>
-        </a>
-      </article>
-
-      <!-- footer -->
-      <footer class="end txtcenter"><p>{{ items.length?'You have reached the horizon.':'Raise the mainsail!' }}</p></footer>
+  <!-- body -->
+  <section class='wrap'>
+    <!-- feeds selection -->
+    <section class='feeds' v-if='settings'>
+      <header class='feeds-header'>
+        <p>Your favorite RSS feed is missing? Please send it to me and I'll do my best to add it fast: <a href='mailto:captain@aboard.io'>captain@aboard.io</a>.</p>
+        <p class='feeds-header-warning'>*may contain adult content.</p>
+      </header>
+      <label class='feed' v-for='feed in feeds | filterBy search in "name" "tags" | orderBy "name"'>
+        <input type='checkbox' value='{{ feed.id }}' v-model='hashlist' @click='toggleFeed(feed.id)' v-show='false'>
+        <svg v-if='hashlist.indexOf(feed.id) > -1' class='feed-icon' width='24' height='24' viewBox='0 0 24 24'><path d='M9.984 17.016l9-9-1.406-1.453-7.594 7.594-3.563-3.563-1.406 1.406zM18.984 3q0.844 0 1.43 0.609t0.586 1.406v13.969q0 0.797-0.586 1.406t-1.43 0.609h-13.969q-0.844 0-1.43-0.609t-0.586-1.406v-13.969q0-0.797 0.586-1.406t1.43-0.609h13.969z'/></svg>
+        <svg v-else class='feed-icon' width='24' height='24' viewBox='0 0 24 24'><path d='M18.984 3q0.797 0 1.406 0.609t0.609 1.406v13.969q0 0.797-0.609 1.406t-1.406 0.609h-13.969q-0.797 0-1.406-0.609t-0.609-1.406v-13.969q0-0.797 0.609-1.406t1.406-0.609h13.969zM18.984 5.016h-13.969v13.969h13.969v-13.969z'/></svg>
+        <span class='feed-name'>{{ feed.name }}<span v-if='feed.mature == "1"'>*</span></span>
+        <span class='feed-tags'>{{ feed.tags }}</span>
+      </label>
     </section>
-  </main><!-- end of .wrapper -->
+
+    <!-- board -->
+    <section class='board' v-else>
+      <header class='board-header'>
+        <svg class='board-logo' width='180' height='180' viewBox='0 0 24 24'><path d='M20 21c-1.39 0-2.78-.47-4-1.32-2.44 1.71-5.56 1.71-8 0C6.78 20.53 5.39 21 4 21H2v2h2c1.38 0 2.74-.35 4-.99 2.52 1.29 5.48 1.29 8 0 1.26.65 2.62.99 4 .99h2v-2h-2zM3.95 19H4c1.6 0 3.02-.88 4-2 .98 1.12 2.4 2 4 2s3.02-.88 4-2c.98 1.12 2.4 2 4 2h.05l1.89-6.68c.08-.26.06-.54-.06-.78s-.34-.42-.6-.5L20 10.62V6c0-1.1-.9-2-2-2h-3V1H9v3H6c-1.1 0-2 .9-2 2v4.62l-1.29.42c-.26.08-.48.26-.6.5s-.15.52-.06.78L3.95 19zM6 6h12v3.97L12 8 6 9.97V6z'/></svg>
+        <h1 class='board-title'>Welcome aboard!</h1>
+        <p class='board-welcome'>The most inspiring feeds in a single place.</p>
+        <a class='board-link' href='https://github.com/noclat/aboard.io#aboardio'>About</a>
+        <a class='board-link' href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=captain%40aboard%2eio&lc=FR&item_name=aboard%2eio&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted'>Donate</a>
+      </header>
+      <section class='board-tiles' id='board'>
+        <article class='tile' v-for='item in items | matchFeed current | orderBy "date" -1 | limitBy 100'>
+          <figure class='tile-wrap'>
+            <div class='tile-bg' data-src='{{ item.image }}'></div>
+            <a :href='item.url' target='_blank'><img class='tile-img' data-src='{{ item.image }}' width='400' height='300' alt='{{ item.title }} by {{ item.author }} on {{ item.source }}'></a>
+          </figure>
+          <header class='tile-info'>
+            <img class='tile-icon' src='http://www.google.com/s2/favicons?domain={{ item.source }}' width='16' height='16' alt='{{ item.source }}'>
+            <time class='tile-date' datetime='{{ item.date | datetime }}'>{{ item.date | day }}</time>
+            <span class='tile-title'>{{ item.title }} <span v-if='item.author'>by {{ item.author }}</span></span>
+          </header>
+        </article>
+      </section>
+      <footer v-if='items.length' class='board-footer'>
+        <p>You have reached the horizon…<br><a href='#' @click.prevent='settings=true'>Find new feeds?</a></p>
+      </footer>
+      <footer v-if='sleep' class='board-sleep'>
+        <svg class='board-sleep-icon' width='24' height='24' viewBox='0 0 24 24'><path d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.61 5.64 5.36 8.04 2.35 8.36 0 10.9 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4h2c0-2.76-1.86-5.08-4.4-5.78C8.61 6.88 10.2 6 12 6c3.03 0 5.5 2.47 5.5 5.5v.5H19c1.65 0 3 1.35 3 3s-1.35 3-3 3z'/></svg>
+        <p>Aboard is sleeping because of the hosting free plan limitations. Please donate to help upgrading to deliver 100% uptime.</p>
+      </footer>
+    </section><!-- end of board -->
+  </section><!-- end of body -->
+</main>
 
 
 
-  <!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-43254126-1', 'aboard.io'); ga('send', 'pageview');
-  </script>
-
-  <!-- Scripts -->
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
-  <script src="app.js"></script>
+<!-- JS not loaded -->
+<section id='no-js'>
+  <p>An error occured while loading JavaScript. Please enable JavaScript in your browser setting, or try to <a href='http://aboard.io'>refresh the page</a>.
+</section>
 
 
-</body>
-</html>
+
+<!-- Scripts -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43254126-1', 'aboard.io'); ga('send', 'pageview');
+</script>
+<script src='https://cdn.jsdelivr.net/vue/1.0.12/vue.min.js'></script>
+<script src='https://cdn.jsdelivr.net/vue.resource/0.5.1/vue-resource.min.js'></script>
+<script src='app.js'></script>

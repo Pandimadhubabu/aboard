@@ -1,1 +1,303 @@
-(function(){var t,e,n,r,o,i,u,s,a=[].indexOf||function(t){for(var e=0,n=this.length;n>e;e++)if(e in this&&this[e]===t)return e;return-1};e=document.querySelector(".board"),r=function(){var t,e,n,r,o;for(r=window.location.hash.substring(1).split("-"),o=[],e=0,n=r.length;n>e;e++)t=r[e],t&&o.push(t);return o},u=function(t){return a.call(r(),t)>=0?i(t):n(t)},i=function(t){return window.location.hash=r().filter(function(e){return e!==t}).join("-")},n=function(t){return a.call(r(),t)<0?window.location.hash=r().concat(t).sort(function(t,e){return parseInt(t,16)-parseInt(e,16)}).join("-"):void 0},o=function(t){return window.location.hash=t.sort(function(t,e){return parseInt(t,16)-parseInt(e,16)}).join("-")},null==localStorage.hash||r().length||(window.location.hash=localStorage.hash),function(){var t;return t=document.createElement("div"),t.className="progress",document.body.appendChild(t),window.progress={speed:500,start:function(){return this.go(.01)},done:function(){return this.go(1)},val:function(){return.01*parseInt(t.style.width||0)},cancel:function(e){return null==e&&(e=0),setTimeout(function(){return t.style.opacity=0},e+300),setTimeout(function(){return t.style.width=0},e+300+this.speed)},go:function(e,n){return null==n&&(n=!1),n!==!1&&(this.speed=n),t.style.webKitTransition=t.style.transition="opacity .3s, width "+this.speed/1e3+"s",t.style.opacity=1,e=Math.min(1,Math.max(0,e)),t.style.width=100*e+"%",1===e?progress.cancel(progress.speed):void 0}}}(),t=angular.module("aboard",[]),t.filter("mature",function(){return function(t){return a.call(t.split(" "),"mature")>=0?"*":""}}),t.filter("hashList",function(){return function(t){var e,n,o,i,u;for(u=[],n=0,o=t.length;o>n;n++)e=t[n],i=e.id,a.call(r(),i)>=0&&u.push(e);return u}}),t.filter("inHashList",function(){return function(t){return a.call(r(),t)>=0}}),s=5,t.controller("main",["$scope","$http","$compile",function(t,n,u){var l,c;return c=[[],[],!1,0,0,s-1,!1],t.feeds=c[0],t.items=c[1],t.total=c[2],t.loading=c[3],t.current=c[4],t.fit=c[5],t.limit=c[6],l=n.jsonp("http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script&callback=JSON_CALLBACK"),l.success(function(e){var n;return t.feeds=function(){var t,r,o,i;for(o=e.feed.entry,i=[],t=0,r=o.length;r>t;t++)n=o[t],i.push(JSON.parse('{"id":"'+n.title.$t+'", '+n.content.$t.replace(/([a-z]+)[\s]*\:[\s]*([^,]+)/g,'"$1":"$2"')+"}"));return i}().filter(function(t){return"0"!==t.online}),r().length?t.loadItems():o(function(){var e,r,o,i;for(o=t.feeds,i=[],e=0,r=o.length;r>e;e++)n=o[e],"1"===n.status&&i.push(n.id);return i}())}),t.loadFeed=function(e){var r,o;return r=function(){var n,r,i,u;for(i=t.feeds,u=[],n=0,r=i.length;r>n;n++)o=i[n],o.id===e&&u.push(o);return u}().pop(),null!=r?(l=n.jsonp("http://aboardio.herokuapp.com/?num=100&callback=JSON_CALLBACK&q="+r.feed),l.error(function(){return i(r.id)}),l.success(function(e){var n,i,u,s;for(s=e.responseData.feed.entries,i=0,u=s.length;u>i;i++)o=s[i],t.items.push({feed:r.id,source:r.url.replace(/^http(?:s)?\:\/\/([^\/]+)\/*$/,"$1"),title:o.title,author:o.author,date:new Date(o.publishedDate),url:o.link,image:(n=o.content.match(/<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/))?n[1].replace(/\&amp;/g,"&"):!1});return t.items=t.items.filter(function(t){return t.image}),t.setCurrent(t.current),t.loading--,progress.go(1-t.loading/t.total),t.loading?void 0:(t.limit=t.fit,t.fill())})):void 0},t.loadItems=function(){var e,n,o,i,u;for(progress.start(),t.items=t.items.filter(function(t){var e;return e=t.feed,a.call(r(),e)>=0}),t.loading=r().filter(function(e){var n;return a.call(function(){var e,r,o,i;for(o=t.items,i=[],e=0,r=o.length;r>e;e++)n=o[e],i.push(n.feed);return i}(),e)<0}).length,t.total=t.loading,u=r(),o=0,i=u.length;i>o;o++)e=u[o],a.call(function(){var e,r,o,i;for(o=t.items,i=[],e=0,r=o.length;r>e;e++)n=o[e],i.push(n.feed);return i}(),e)<0&&t.loadFeed(e);return t.$$phase?void 0:t.$apply()},t.resetCurrent=function(){return t.setCurrent(!1)},t.setCurrent=function(e){var n,r,o;return o=[e,0,document.querySelector("#feed-"+e),document.querySelector(".nav-feeds")],t.current=o[0],document.body.scrollTop=o[1],n=o[2],r=o[3],n&&(r.scrollLeft=n.offsetLeft-r.offsetLeft-r.offsetWidth/2+n.offsetWidth/2),t.loading||(t.limit=t.fit),t.$$phase?void 0:t.$apply()},t.more=function(){return t.limit+=s,t.$$phase?void 0:t.$apply()},t.fill=function(){return t.more(),e.clientHeight<=1.1*window.innerHeight?setTimeout(arguments.callee,10):t.fit=t.limit},window.addEventListener("scroll",function(){return document.body.scrollTop>document.body.scrollHeight-1.2*window.innerHeight&&t.limit<t.items.length?t.more():void 0}),window.addEventListener("hashchange",function(){return localStorage.hash=window.location.hash.substring(1),t.loadItems()}),window.addEventListener("keydown",function(e){var n;switch(e.which){case 37:n=t.current?document.querySelector("#feed-"+t.current).previousSibling:document.querySelector(".nav-feed:last-child");break;case 39:n=t.current?document.querySelector("#feed-"+t.current).nextSibling:document.querySelector(".nav-feed:first-child")}return n?n.getAttribute?t.setCurrent(n.getAttribute("id").replace("feed-","")):t.resetCurrent():void 0})}]),t.controller("feed",["$scope","$http",function(t,e){return t.showItems=function(){return t.setCurrent(t.feed.id)},t.toggleFeed=function(){var e;return u(t.feed.id),t.setCurrent((e=t.feed.id,a.call(r(),e)>=0?t.feed.id:!1))}}]),function(){var t,e,n,r,o,i,u,s;return u=function(){var t,n,r,o;for(r=["logo","wave","boat"],o=[],t=0,n=r.length;n>t;t++)e=r[t],o.push(document.getElementById(e));return o}(),n=u[0],i=u[1],t=u[2],s=[0,!1],r=s[0],o=s[1],n.addEventListener("mouseout",function(){return clearInterval(o)}),n.addEventListener("mouseover",function(){var e,n,u;return u=[1e3/24,4],n=u[0],e=u[1],o=setInterval(function(){var o;return o=e*Math.sin(r*Math.PI*n/1e3/2),i.setAttribute("transform","translate(-"+o+")"),t.setAttribute("transform","translate("+o+")"),r++},n)})}()}).call(this);
+(function() {
+  var App, SLEEP, hashAppend, hashList, hashLoad, hashRemove, hashToggle, lazyLoad, loadFeed, loadFeeds, timeout, update,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  window.requestAnimFrame = (function() {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) {
+      return window.setTimeout(callback, 1000 / 60);
+    };
+  })();
+
+  timeout = function(d, c) {
+    return setTimeout(c, d);
+  };
+
+  hashList = function() {
+    var id, _i, _len, _ref, _results;
+    _ref = window.location.hash.substring(1).split('-');
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      id = _ref[_i];
+      if (id) {
+        _results.push(id);
+      }
+    }
+    return _results;
+  };
+
+  hashToggle = function(id) {
+    if (__indexOf.call(hashList(), id) >= 0) {
+      return hashRemove(id);
+    } else {
+      return hashAppend(id);
+    }
+  };
+
+  hashRemove = function(id) {
+    return window.location.hash = hashList().filter(function(a) {
+      return a !== id;
+    }).join('-');
+  };
+
+  hashAppend = function(id) {
+    if (__indexOf.call(hashList(), id) < 0) {
+      return window.location.hash = hashList().concat(id).sort(function(a, b) {
+        return parseInt(a, 16) - parseInt(b, 16);
+      }).join('-');
+    }
+  };
+
+  hashLoad = function(ids) {
+    return window.location.hash = ids.sort(function(a, b) {
+      return parseInt(a, 16) - parseInt(b, 16);
+    }).join('-');
+  };
+
+  if ((localStorage['hash'] != null) && !hashList().length) {
+    window.location.hash = localStorage['hash'];
+  }
+
+  lazyLoad = function() {
+    var item, _i, _len, _ref, _results;
+    _ref = document.querySelectorAll('[data-src]');
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      item = _ref[_i];
+      if (!(item.getBoundingClientRect().top < window.innerHeight * 1.1)) {
+        continue;
+      }
+      if (item.tagName === 'IMG') {
+        item.src = item.dataset.src;
+      } else {
+        item.style.backgroundImage = 'url(' + item.dataset.src + ')';
+      }
+      _results.push(delete item.dataset.src);
+    }
+    return _results;
+  };
+
+  SLEEP = false;
+
+  App = new Vue({
+    el: '#app',
+    data: {
+      feeds: [],
+      items: [],
+      loaded: [],
+      settings: false,
+      current: false,
+      sleep: false
+    },
+    watch: {
+      'hashlist': function() {
+        return App.feeds.reverse().reverse();
+      },
+      'items': function() {
+        return Vue.nextTick(lazyLoad);
+      },
+      'current': function() {
+        Vue.nextTick(lazyLoad);
+        if (!App.settings) {
+          return window.scrollTo(0, document.body.scrollTop + (document.getElementById('board').getBoundingClientRect().top - 70));
+        }
+      },
+      'settings': function() {
+        window.scrollTo(0, 0);
+        if (App.settings === true) {
+          return Vue.nextTick(function() {
+            loadFeeds((function(feeds) {
+              return App.feeds = feeds;
+            }), false);
+            return document.getElementById('search').focus();
+          });
+        } else {
+          return Vue.nextTick(lazyLoad);
+        }
+      }
+    },
+    methods: {
+      setCurrent: function(id, e) {
+        var nav, target, _ref;
+        App.$set('current', __indexOf.call(hashList(), id) >= 0 ? id : false);
+        _ref = [document.getElementById('nav'), document.getElementById('feed-' + id)], nav = _ref[0], target = _ref[1];
+        return nav.scrollLeft = id === false ? 0 : (target.offsetLeft + target.offsetWidth / 2) - (nav.offsetLeft + nav.offsetWidth / 2);
+      },
+      prev: function() {
+        return App.setCurrent((App.current ? document.getElementById('feed-' + App.current).previousElementSibling : document.querySelector('.nav-tab:last-child')).getAttribute('id').replace('feed-', ''));
+      },
+      next: function() {
+        return App.setCurrent((document.getElementById('feed-' + App.current).nextElementSibling || document.querySelector('.nav-tab')).getAttribute('id').replace('feed-', ''));
+      },
+      toggleFeed: function(id) {
+        return hashToggle(id);
+      }
+    },
+    filters: {
+      datetime: function(date) {
+        return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-') + ' ' + [date.getHours(), date.getMinutes(), date.getSeconds()].join(':');
+      },
+      day: function(date) {
+        return date.getMonth() + 1 + '/' + date.getDate();
+      },
+      feedsOn: function(feeds) {
+        return feeds.filter(function(f) {
+          var _ref;
+          return _ref = f.id, __indexOf.call(hashList(), _ref) >= 0;
+        });
+      },
+      matchFeed: function(items, value) {
+        return items.filter(function(a) {
+          return value === false || value === a.feed;
+        });
+      }
+    },
+    ready: function() {
+      window.addEventListener('scroll', function() {
+        return requestAnimFrame(lazyLoad);
+      });
+      window.addEventListener('keydown', function(e) {
+        switch (e.which) {
+          case 27:
+            e.preventDefault();
+            return App.$set('settings', !App.settings);
+          case 37:
+            e.preventDefault();
+            return App.prev();
+          case 39:
+            e.preventDefault();
+            return App.next();
+        }
+      });
+      return SLEEP = timeout(3000, function() {
+        return App.$set('sleep', true);
+      });
+    }
+  });
+
+  update = function() {
+    var feed, id, item, _i, _len, _ref, _ref1;
+    if (!hashList().length) {
+      hashLoad((function() {
+        var _i, _len, _ref, _results;
+        _ref = App.feeds;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          feed = _ref[_i];
+          if (feed.status === '1') {
+            _results.push(feed.id);
+          }
+        }
+        return _results;
+      })());
+    }
+    localStorage['hash'] = window.location.hash.substring(1);
+    _ref = hashList();
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      id = _ref[_i];
+      if (__indexOf.call((function() {
+        var _j, _len1, _ref1, _results;
+        _ref1 = App.items;
+        _results = [];
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          item = _ref1[_j];
+          if (item.feed) {
+            _results.push(item.feed);
+          }
+        }
+        return _results;
+      })(), id) < 0) {
+        loadFeed(id);
+      }
+    }
+    App.items = App.items.filter(function(item) {
+      var _ref1;
+      return _ref1 = item.feed, __indexOf.call(hashList(), _ref1) >= 0;
+    });
+    if (_ref1 = App.current, __indexOf.call(hashList(), _ref1) < 0) {
+      App.$set('current', false);
+    }
+    return App.$set('hashlist', hashList());
+  };
+
+  loadFeed = function(id) {
+    var feed;
+    feed = App.feeds.filter(function(f) {
+      return f.id === id;
+    }).pop();
+    if (feed == null) {
+      return;
+    }
+    return Vue.http.jsonp('http://aboardio.herokuapp.com/?num=100&q=' + feed.feed).then(function(res) {
+      var images, item, items, _i, _len;
+      items = (function() {
+        var _i, _len, _ref, _results;
+        _ref = res.data.responseData.feed.entries;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          item = _ref[_i];
+          _results.push({
+            feed: feed.id,
+            source: feed.domain,
+            title: item.title,
+            author: item.author,
+            date: new Date(item.publishedDate),
+            url: item.link,
+            image: (images = item.content.match(/<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/)) ? images[1].replace(/\&amp;/g, '&') : false
+          });
+        }
+        return _results;
+      })();
+      for (_i = 0, _len = items.length; _i < _len; _i++) {
+        item = items[_i];
+        if (item.image) {
+          App.items.push(item);
+        }
+      }
+      clearTimeout(SLEEP);
+      return App.loaded.push(id);
+    }, function(res) {
+      return hashRemove(id);
+    });
+  };
+
+  loadFeeds = function(callback, cache) {
+    if (cache == null) {
+      cache = true;
+    }
+    if (localStorage['feeds'] && cache) {
+      return callback(JSON.parse(localStorage['feeds']));
+    } else {
+      return Vue.http.jsonp('http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script').then(function(res) {
+        var feed, feeds;
+        feeds = ((function() {
+          var _i, _len, _ref, _results;
+          _ref = res.data.feed.entry;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            feed = _ref[_i];
+            _results.push(JSON.parse('{"id":"' + feed.title['$t'] + '", ' + (feed.content['$t'].replace(/([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')) + '}'));
+          }
+          return _results;
+        })()).filter(function(feed) {
+          return feed.online !== "0";
+        });
+        localStorage['feeds'] = JSON.stringify(feeds);
+        return callback(feeds);
+      });
+    }
+  };
+
+  if (App instanceof Vue) {
+    (function() {
+      document.body.removeChild(document.getElementById('no-js'));
+      document.getElementById('app').style.display = 'block';
+      return loadFeeds(function(feeds) {
+        App.feeds = feeds;
+        hashLoad(hashList());
+        update();
+        return window.addEventListener('hashchange', update);
+      });
+    })();
+  }
+
+}).call(this);
