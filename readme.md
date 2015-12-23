@@ -11,10 +11,10 @@ Feel free to contact me at [captain@aboard.io](mailto:captain@aboard.io).
 
 - New design
 - Improved performances and reliability
-- Feeds favicon displayed
+- Feeds favicons displayed
 - Right click on images enabled
 - Lazy loading images to avoid consuming mobile data
-- Switched from Google Feed API to [feedrapp](https://github.com/sdepold/feedrapp) (downtimes due to Heroku free plan)
+- Switched from Google Feed API to [feedrapp](https://github.com/sdepold/feedrapp) (may experience downtimes due to Heroku free plan)
 
 ## What RSS feeds are compatible?
 
