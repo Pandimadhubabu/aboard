@@ -75,9 +75,11 @@ update = ->
 
 
 # Load feed items
+loading = []
 loadFeed = (id) ->
   feed = App.feeds.filter( (f) -> f.id is id ).pop()
-  return if not feed?
+  return if not feed? or id in loading
+  loading.push id
   Vue.http.jsonp('http://aboardio.herokuapp.com/?num=100&q='+feed.feed).then (res) ->
     items = ({
       feed: feed.id
