@@ -92,6 +92,7 @@ loadFeed = (id) ->
     } for item in res.data.responseData.feed.entries)
     App.items.push item for item in items when item.image
     clearTimeout SLEEP
+    loading.splice loading.indexOf(id), 1
     App.loaded.push id # display favicon
   , (res) -> hashRemove id
 
