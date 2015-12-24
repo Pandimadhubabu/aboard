@@ -23,6 +23,8 @@ To make your RSS feed compatible with Aboard, please follow these rules:
 - use images at least 400 x 300px wide;
 - there is no item count limitation, but 10 or more is better for the users.
 
+Then send me an email with your feed URL so I can add it to Aboard.
+
 ## Categories
 
 Aboard uses categories to help you filter and discover feeds:
