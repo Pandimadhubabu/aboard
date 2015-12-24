@@ -9,7 +9,7 @@ Feel free to contact me at [captain@aboard.io](mailto:captain@aboard.io).
 
 ## What's new since December 23, 2015
 
-- New design
+- New design with wider images
 - Improved performances and reliability
 - Feeds favicons displayed
 - Right click on images enabled
