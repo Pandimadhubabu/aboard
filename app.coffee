@@ -59,7 +59,7 @@ App = new Vue
         when 27 then do e.preventDefault; App.$set 'settings', not App.settings
         when 37 then do e.preventDefault; do App.prev
         when 39 then do e.preventDefault; do App.next
-    SLEEP = timeout 3000, -> App.$set 'sleep', true
+    SLEEP = timeout 3000, -> App.$set 'sleep', App.items.length > 0
 
 
 
