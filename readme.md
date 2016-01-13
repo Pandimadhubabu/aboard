@@ -39,6 +39,6 @@ Aboard uses categories to help you filter and discover feeds:
 
 ## About Aboard
 
-The project was first created in two days as a personal challenge. It initially ran on [AngularJS](http://angularjs.org) and a simple [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18) (using the [Google Spreadsheet to JSON API](https://developers.google.com/gdata/samples/spreadsheet_sample) and the [Google Feed API](https://developers.google.com/feed/)).
+The project was first created in two days as a personal challenge. It was initially running on [AngularJS](http://angularjs.org) and a simple [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18) (using the [Google Spreadsheet to JSON API](https://developers.google.com/gdata/samples/spreadsheet_sample) and the [Google Feed API](https://developers.google.com/feed/)).
 
-On november 2015, Google closed its Feed API and Aboard couldn't fetch RSS anymore. I took the opportunity to redesign Aboard with some improvements I had noted in background until then, and give a try to [Vue.js](http://vuejs.org/).
+On november 2015, Google closed its Feed API and Aboard couldn't fetch RSS anymore. I took the opportunity to redesign Aboard with some improvements I had noted in background until then, and give a try at [Vue.js](http://vuejs.org/).
