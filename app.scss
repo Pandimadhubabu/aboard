@@ -105,8 +105,6 @@ a { text-decoration: underline; color: $dark; &:hover { text-decoration: none; }
   @extend %board-footer, %small; color: $grey;
   &:before { @extend %block; content: '—'; color: $shade; }
 }
-.board-sleep { @extend %board-footer; }
-.board-sleep-icon { @extend %icon; margin-bottom: $unit; fill: $dark; @include font(2); }
 
 .tile { @extend %inline-block; width: 100%; max-width: calc(#{$tile} + #{$unit}); padding: 0 $unit/2 $unit; text-decoration: none; font-size: 1rem; }
 .tile-wrap { @extend %block, %relative; width: 100%; padding-bottom: 75%; background: #FFF center no-repeat url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='#E2E1E0' d='M23 18V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2zM8.5 12.5l2.5 3.01L14.5 11l4.5 6H5l3.5-4.5z'/></svg>"); }

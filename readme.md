@@ -14,7 +14,7 @@ Feel free to contact me at [captain@aboard.io](mailto:captain@aboard.io).
 - Feeds favicons displayed
 - Right click on images enabled
 - Lazy loading images to avoid consuming mobile data
-- Switched from Google Feed API to [feedrapp](https://github.com/sdepold/feedrapp) (may experience downtimes due to Heroku free plan)
+- Switched from Google Feed API to ~~[feedrapp](https://github.com/sdepold/feedrapp) (may experience downtimes due to Heroku free plan)~~ [rss2json](http://rss2json.com/)
 
 ## Which RSS feeds are compatible?
 

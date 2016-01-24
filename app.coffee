@@ -23,10 +23,9 @@ lazyLoad = ->
 
 
 # App
-SLEEP = false
 App = new Vue
   el: '#app'
-  data: feeds: [], items: [], loaded: [], settings: false, current: false, sleep: false
+  data: feeds: [], items: [], loaded: [], settings: false, current: false
   watch:
     'hashlist': -> App.feeds.reverse().reverse() # force DOM update
     'items': -> Vue.nextTick lazyLoad
@@ -59,7 +58,6 @@ App = new Vue
         when 27 then do e.preventDefault; App.$set 'settings', not App.settings
         when 37 then do e.preventDefault; do App.prev
         when 39 then do e.preventDefault; do App.next
-    SLEEP = timeout 3000, -> App.$set 'sleep', App.items.length > 0
 
 
 
@@ -80,18 +78,17 @@ loadFeed = (id) ->
   feed = App.feeds.filter( (f) -> f.id is id ).pop()
   return if not feed? or id in loading
   loading.push id
-  Vue.http.jsonp('http://aboardio.herokuapp.com/?num=100&q='+feed.feed).then (res) ->
+  Vue.http.get('http://rss2json.com/api.json?rss_url='+encodeURIComponent(feed.feed)).then (res) ->
     items = ({
       feed: feed.id
       source: feed.domain
       title: item.title
       author: item.author
-      date: new Date item.publishedDate
+      date: new Date item.pubDate
       url: item.link
       image: if images = ( item.content.match /<img[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*>/ ) then images[1].replace /\&amp;/g, '&' else false
-    } for item in res.data.responseData.feed.entries)
+    } for item in res.data.items)
     App.items.push item for item in items when item.image
-    clearTimeout SLEEP
     loading.splice loading.indexOf(id), 1
     App.loaded.push id # display favicon
   , (res) -> hashRemove id
