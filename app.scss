@@ -46,11 +46,9 @@ $dark: #424140;
 // Common
 // ------------------------------
 * { box-sizing: border-box; margin: 0; padding: 0; }
-// html, body { height: 100%; }
 html { font-size: $base / 16px * 100%; }
 body { background: $light; font: 1rem $font; line-height: $ratio; color: $dark; }
 a { text-decoration: underline; color: $dark; &:hover { text-decoration: none; }}
-  // #app { width: 320px; margin: auto; }
 
 .nav {
   @extend %txt-center;
