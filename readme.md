@@ -1,11 +1,10 @@
 # Aboard
 
-[![Donate to this project using Paypal](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=captain%40aboard%2eio&lc=FR&item_name=aboard%2eio&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
 [![MIT license](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-[Aboard](http://aboard.io) is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.
+**ANNOUNCEMENT:** Aboard.io will shut down on August 2016. It will remain accessible for free on its Github Pages URL https://noclat.github.io/aboard.io. Thank you for your support.
 
-Feel free to contact me at [captain@aboard.io](mailto:captain@aboard.io).
+[Aboard](https://noclat.github.io/aboard.io) is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.
 
 ## What's new since December 23, 2015
 
