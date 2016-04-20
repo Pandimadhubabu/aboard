@@ -2,9 +2,9 @@
 
 [![MIT license](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-**ANNOUNCEMENT:** Aboard.io will shut down on August 2016. It will remain accessible for free on its Github Pages URL https://noclat.github.io/aboard.io. Thank you for your support.
+**ANNOUNCEMENT:** Aboard.io will shut down on August 2016. It will remain accessible for free on its Github Pages URL https://noclat.github.io/aboard. Thank you for your support.
 
-[Aboard](https://noclat.github.io/aboard.io) is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.
+[Aboard](https://noclat.github.io/aboard) is an inspiration board for artists and designers which combines the most beautiful RSS feeds from the Web. You can create your own list, Aboard will remember it the next time you come.
 
 ## What's new since December 23, 2015
 
@@ -22,7 +22,7 @@ To make your RSS feed compatible with Aboard, please follow these rules:
 - use images at least 400 x 300px wide;
 - there is no item count limitation, but 10 or more is better for the users.
 
-Then [send me an email](mailto:captain@aboard.io) with your feed URL so I can add it to Aboard.
+Then report an issue with your feed URL so I can add it to Aboard.
 
 ## Categories
 
