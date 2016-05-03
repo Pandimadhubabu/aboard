@@ -78,7 +78,7 @@ loadFeed = (id) ->
   feed = App.feeds.filter( (f) -> f.id is id ).pop()
   return if not feed? or id in loading
   loading.push id
-  Vue.http.get('http://rss2json.com/api.json?rss_url='+encodeURIComponent(feed.feed)).then (res) ->
+  Vue.http.get('https://rss2json.com/api.json?rss_url='+encodeURIComponent(feed.feed)).then (res) ->
     items = ({
       feed: feed.id
       source: feed.domain
@@ -98,7 +98,7 @@ loadFeed = (id) ->
 # Load feeds list
 loadFeeds = (callback, cache = true) ->
   if localStorage['feeds'] and cache then callback JSON.parse localStorage['feeds']
-  else Vue.http.jsonp('http://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script').then (res) ->
+  else Vue.http.jsonp('https://spreadsheets.google.com/feeds/list/1QgkAchwwtS8IH9GPBD-LPLY41_okXHGHw7UTFGa-a18/od6/public/basic?alt=json-in-script').then (res) ->
     feeds = ( JSON.parse '{"id":"'+feed.title['$t']+'", '+(feed.content['$t'].replace /([a-z]+)[\s]*\:[\s]*([^,]+)/g, '"$1":"$2"')+'}' for feed in res.data.feed.entry ).filter ( feed ) -> feed.online isnt "0"
     localStorage['feeds'] = JSON.stringify feeds
     callback feeds
