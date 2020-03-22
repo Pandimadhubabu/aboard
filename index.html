@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name='og:title' content='Aboard — Inspiration board'>
 <meta name='og:description' content='Aboard is an inspiration board for artists and designers which let you combine the most beautiful RSS feeds from the Web.'>
-<meta name='og:image' content='http://aboard.io/facebook.png'>
+<meta name='og:image' content='https://aboard.io/facebook.png'>
 <link href='app.css?d=2015-12-23' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700' rel='stylesheet' type='text/css'>
 <link rel='icon' type='image/x-icon' href='favicon.png'>
@@ -39,7 +39,7 @@
         <span class='nav-tab-name'>All</span>
       </button>
       <button class='nav-tab' id='feed-{{ feed.id }}' :class='{ "nav-tab-current": feed.id == current }' v-for='feed in feeds | feedsOn | orderBy "name"' @click.stop='setCurrent(feed.id)'>
-        <img v-show='loaded.indexOf(feed.id) > -1' class='nav-tab-icon' src='http://www.google.com/s2/favicons?domain={{ feed.domain }}' width='16' height='16' alt='{{ item.source }}'>
+        <img v-show='loaded.indexOf(feed.id) > -1' class='nav-tab-icon' src='https://www.google.com/s2/favicons?domain={{ feed.domain }}' width='16' height='16' alt='{{ item.source }}'>
         <svg v-else class='nav-tab-wait' width='24' height='24' viewBox='0 0 24 24'><path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/></svg>
         <span class='nav-tab-name'>{{ feed.name }}<span v-if='feed.mature == "1"'>*</span></span>
       </button>
@@ -80,7 +80,7 @@
             <a :href='item.url' target='_blank'><img class='tile-img' data-src='{{ item.image }}' width='400' height='300' alt='{{ item.title }} by {{ item.author }} on {{ item.source }}'></a>
           </figure>
           <header class='tile-info'>
-            <img class='tile-icon' src='http://www.google.com/s2/favicons?domain={{ item.source }}' width='16' height='16' alt='{{ item.source }}'>
+            <img class='tile-icon' src='https://www.google.com/s2/favicons?domain={{ item.source }}' width='16' height='16' alt='{{ item.source }}'>
             <time class='tile-date' datetime='{{ item.date | datetime }}'>{{ item.date | day }}</time>
             <span class='tile-title'>{{ item.title }} <span v-if='item.author'>by {{ item.author }}</span></span>
           </header>
@@ -97,7 +97,7 @@
 
 <!-- JS not loaded -->
 <section id='no-js'>
-  <p>An error occured while loading JavaScript. Please enable JavaScript in your browser setting, or try to <a href='http://aboard.io'>refresh the page</a>.
+  <p>An error occured while loading JavaScript. Please enable JavaScript in your browser setting, or try to <a href='https://aboard.io'>refresh the page</a>.
 </section>
 
 
@@ -105,7 +105,7 @@
 <!-- Scripts -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-43254126-1', 'auto'); ga('send', 'pageview');
+  ga('create', 'UA-432126-1', 'auto'); ga('send', 'pageview');
 </script>
 <script src='https://cdn.jsdelivr.net/vue/1.0.12/vue.min.js'></script>
 <script src='https://cdn.jsdelivr.net/vue.resource/0.5.1/vue-resource.min.js'></script>
