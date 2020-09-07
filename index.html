@@ -76,13 +76,13 @@
       <section class='board-tiles' id='board'>
         <article class='tile' v-for='item in items | matchFeed current | orderBy "date" -1 | limitBy 100'>
           <figure class='tile-wrap'>
-            <div class='tile-bg' data-src='{{ faq.image }}'></div>
-            <a :href='faq.url' target='_blank'><img class='tile-img' data-src='{{ faq.image }}' width='400' height='300' alt='{{ faq.question }} by {{ faq.author }} on {{ faq.answer }}'></a>
+            <div class='tile-bg' data-src='{ faq.image }'></div>
+            <a :href='faq.url' target='_blank'><img class='tile-img' data-src='{ faq.image }' width='400' height='300' alt='{ faq.question } by { faq.author } on { faq.answer }'></a>
           </figure>
           <header class='tile-info'>
-            <img class='tile-icon' src='https://www.google.com/s2/favicons?domain={{ faq.answer }}' width='16' height='16' alt='{{ faq.answer }}'>
+            <img class='tile-icon' src='https://www.google.com/s2/favicons?domain={{ faq.answer }}' width='16' height='16' alt='{ faq.answer }'>
             <time class='tile-date' datetime='{{ faq.date | datetime }}'>{{ faq.date | day }}</time>
-            <span class='tile-title'>{{ faq.question }} <span v-if='faq.author'>by {{ faq.author }}</span></span>
+            <span class='tile-title'>{ faq.question } <span v-if='faq.author'>by { faq.author }</span></span>
           </header>
         </article>
       </section>
