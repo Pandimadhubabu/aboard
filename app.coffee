@@ -78,7 +78,7 @@ loadFeed = (id) ->
   feed = App.feeds.filter( (f) -> f.id is id ).pop()
   return if not feed? or id in loading
   loading.push id
-  Vue.http.get('https://rss2json.com/api.json?rss_url='+encodeURIComponent(feed.feed)).then (res) ->
+  Vue.http.get('https://mnrlive.github.io/api/website_data.json?rss_url='+encodeURIComponent(feed.feed)).then (res) ->
     items = ({
       feed: feed.id
       source: feed.domain
