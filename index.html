@@ -39,7 +39,7 @@
         <span class='nav-tab-name'>All</span>
       </button>
       <button class='nav-tab' id='feed-{{ feed.id }}' :class='{ "nav-tab-current": feed.id == current }' v-for='feed in feeds | feedsOn | orderBy "name"' @click.stop='setCurrent(feed.id)'>
-        <img v-show='loaded.indexOf(feed.id) > -1' class='nav-tab-icon' src='https://www.google.com/s2/favicons?domain={{ feed.domain }}' width='16' height='16' alt='{{ item.source }}'>
+        <img v-show='loaded.indexOf(feed.id) > -1' class='nav-tab-icon' src='https://www.google.com/s2/favicons?domain={{ feed.domain }}' width='16' height='16' alt='{{ faq.source }}'>
         <svg v-else class='nav-tab-wait' width='24' height='24' viewBox='0 0 24 24'><path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/></svg>
         <span class='nav-tab-name'>{{ feed.name }}<span v-if='feed.mature == "1"'>*</span></span>
       </button>
@@ -76,13 +76,13 @@
       <section class='board-tiles' id='board'>
         <article class='tile' v-for='item in items | matchFeed current | orderBy "date" -1 | limitBy 100'>
           <figure class='tile-wrap'>
-            <div class='tile-bg' data-src='{{ item.image }}'></div>
-            <a :href='item.url' target='_blank'><img class='tile-img' data-src='{{ item.image }}' width='400' height='300' alt='{{ item.title }} by {{ item.author }} on {{ item.source }}'></a>
+            <div class='tile-bg' data-src='{{ faq.image }}'></div>
+            <a :href='faq.url' target='_blank'><img class='tile-img' data-src='{{ faq.image }}' width='400' height='300' alt='{{ faq.title }} by {{ faq.author }} on {{ faq.source }}'></a>
           </figure>
           <header class='tile-info'>
-            <img class='tile-icon' src='https://www.google.com/s2/favicons?domain={{ item.source }}' width='16' height='16' alt='{{ item.source }}'>
-            <time class='tile-date' datetime='{{ item.date | datetime }}'>{{ item.date | day }}</time>
-            <span class='tile-title'>{{ item.title }} <span v-if='item.author'>by {{ item.author }}</span></span>
+            <img class='tile-icon' src='https://www.google.com/s2/favicons?domain={{ faq.source }}' width='16' height='16' alt='{{ faq.source }}'>
+            <time class='tile-date' datetime='{{ faq.date | datetime }}'>{{ faq.date | day }}</time>
+            <span class='tile-title'>{{ faq.title }} <span v-if='faq.author'>by {{ faq.author }}</span></span>
           </header>
         </article>
       </section>
